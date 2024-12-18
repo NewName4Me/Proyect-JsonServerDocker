@@ -1,4 +1,5 @@
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
+import { Carrito } from '../../js/entities/Carrito.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
@@ -90,5 +91,5 @@ function mostrarModal(meal) {
 }
 
 function agregarRecetaAlCarrito(meal) {
-    console.log(meal);
+    new Carrito().addItem(meal);
 }
