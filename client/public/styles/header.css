@@ -1,0 +1,22 @@
+header ul{
+    display: flex;
+    align-items: center;
+    background: var(--primary);
+    position: fixed;
+    height: 15vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    gap: 2rem;
+    z-index: 10;
+}
+
+header ul img{
+    width: 13%;
+    border-radius: 20px;
+    margin-left: 20%;
+}
+
+header ul a{
+    font-size: xx-large;
+}

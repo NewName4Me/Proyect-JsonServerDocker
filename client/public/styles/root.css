@@ -42,3 +42,15 @@
     --error-focus: #e74c3c;
     --error-content: #000000;
 }
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+main{
+    margin-top: 15vh;
+}
