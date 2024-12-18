@@ -1,5 +1,6 @@
 import { CategoriesRepository } from '../../js/repository/CategoriesRepository.js';
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
+import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
@@ -8,6 +9,8 @@ async function startApp() {
     const categoriesContainer = document.getElementById('categoriesContainer');
 
     loadListOfCategories(categories, categoriesContainer);
+
+    displayAmountOfItems();
 }
 
 /**

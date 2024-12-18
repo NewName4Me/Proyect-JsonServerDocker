@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', startApp);
 async function startApp() {
     const urlParams = new URLSearchParams(location.search);
     const categoria = urlParams.get('categoria');
-    const mealsContainer = document.getElementById('mealsContainer');
 
     let mealList = [];
 
