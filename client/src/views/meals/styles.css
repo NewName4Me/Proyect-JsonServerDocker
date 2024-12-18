@@ -1,0 +1,51 @@
+body {
+    overflow-x: hidden;
+}
+
+#mealsContainer {
+    margin-inline: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+#mealsContainer>article{
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#mealsContainer img {
+    width: 100%;
+}
+
+dialog {
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+}
+
+dialog img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
+}
+
+dialog h2 {
+    margin-top: 1rem;
+}
+
+dialog p {
+    margin-top: 1rem;
+}
+
+.modalShown{
+    filter: blur(10px);
+}

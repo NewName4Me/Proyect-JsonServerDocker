@@ -27,28 +27,59 @@ async function loadListOfMeals(meals, container) {
 }
 
 function designMeal(meal) {
-    const { id, strMeal, strInstructions, strMealThumb } = meal;
+    const { id, strMeal, strMealThumb } = meal;
 
-    const categoryContainer = document.createElement('ARTICLE');
+    const mealCard = document.createElement('ARTICLE');
 
-    const categoryTitle = document.createElement('H2');
-    const categoryImage = document.createElement('IMG');
-    const categoryInstructions = document.createElement('P');
-    const verRecetaCategoria = document.createElement('A');
+    const mealImage = document.createElement('IMG');
+    const mealTitle = document.createElement('H2');
+    const verReceta = document.createElement('BUTTON');
 
-    categoryContainer.setAttribute('data-id', id);
+    mealCard.setAttribute('data-id', id);
 
-    categoryTitle.textContent = strMeal;
-    categoryImage.src = strMealThumb;
-    categoryInstructions.textContent = strInstructions.split('[')[0];
-    verRecetaCategoria.textContent = 'Ver receta';
-    verRecetaCategoria.classList.add('btn', 'btn-primary');
+    mealImage.src = strMealThumb;
+    mealTitle.textContent = strMeal;
+    verReceta.textContent = 'Ver receta';
+    verReceta.classList.add('btn', 'btn-primary');
 
+    mealCard.appendChild(mealImage);
+    mealCard.appendChild(mealTitle);
+    mealCard.appendChild(verReceta);
 
-    categoryContainer.appendChild(categoryImage);
-    categoryContainer.appendChild(categoryTitle);
-    categoryContainer.appendChild(categoryInstructions);
-    categoryContainer.appendChild(verRecetaCategoria);
+    verReceta.addEventListener('click', () => mostrarModal(meal));
 
-    return Promise.resolve(categoryContainer);
+    return Promise.resolve(mealCard);
+}
+
+function mostrarModal(meal) {
+    const { strInstructions } = meal;
+
+    const modal = document.createElement('DIALOG');
+    const closeModal = document.createElement('BUTTON');
+    const modalImage = document.createElement('IMG');
+    const modalTitle = document.createElement('H2');
+    const modalInstructions = document.createElement('P');
+
+    closeModal.textContent = 'Cerrar';
+    closeModal.classList.add('btn', 'btn-primary');
+
+    modalImage.src = meal.strMealThumb;
+    modalTitle.textContent = meal.strMeal;
+    modalInstructions.textContent = strInstructions.split('[')[0];
+
+    modal.appendChild(modalImage);
+    modal.appendChild(modalTitle);
+    modal.appendChild(modalInstructions);
+    modal.appendChild(closeModal);
+
+    document.body.appendChild(modal);
+
+    closeModal.addEventListener('click', () => {
+        modal.close();
+        document.getElementById('mealsContainer').classList.remove('modalShown');
+    });
+
+    document.getElementById('mealsContainer').classList.add('modalShown');
+
+    modal.showModal();
 }
