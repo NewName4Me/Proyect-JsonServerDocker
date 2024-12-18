@@ -10,6 +10,7 @@ export class MealsRepository {
     }
 
     async getMealsFiltedByCategory(category = '') {
-        return (await this.getMeals()).filter(meal => meal.strCategory == category);
+        const data = await fetch(`${this.#Meals_API}?strCategory=${category}`);
+        return await data.json();
     }
 }
