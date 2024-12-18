@@ -34,6 +34,7 @@ function designMeal(meal) {
     const mealImage = document.createElement('IMG');
     const mealTitle = document.createElement('H2');
     const verReceta = document.createElement('BUTTON');
+    const agregarReceta = document.createElement('BUTTON');
 
     mealCard.setAttribute('data-id', id);
 
@@ -41,11 +42,15 @@ function designMeal(meal) {
     mealTitle.textContent = strMeal;
     verReceta.textContent = 'Ver receta';
     verReceta.classList.add('btn', 'btn-primary');
+    agregarReceta.textContent = 'Agregar receta';
+    agregarReceta.classList.add('btn', 'btn-neutral');
 
     mealCard.appendChild(mealImage);
     mealCard.appendChild(mealTitle);
     mealCard.appendChild(verReceta);
+    mealCard.appendChild(agregarReceta);
 
+    agregarReceta.addEventListener('click', () => agregarRecetaAlCarrito(meal));
     verReceta.addEventListener('click', () => mostrarModal(meal));
 
     return Promise.resolve(mealCard);
@@ -82,4 +87,8 @@ function mostrarModal(meal) {
     document.getElementById('mealsContainer').classList.add('modalShown');
 
     modal.showModal();
+}
+
+function agregarRecetaAlCarrito(meal) {
+    console.log(meal);
 }
