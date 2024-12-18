@@ -1,4 +1,4 @@
-header ul{
+header ul {
     display: flex;
     align-items: center;
     background: var(--primary);
@@ -11,12 +11,30 @@ header ul{
     z-index: 10;
 }
 
-header ul img{
+header ul img {
     width: 13%;
     border-radius: 20px;
     margin-left: 20%;
 }
 
-header ul a{
+header ul a {
     font-size: xx-large;
+}
+
+header ul li:last-of-type a {
+    position: relative;
+}
+
+#itemsAmount {
+    background: var(--error);
+    border-radius: 50%;
+    color: var(--base-100);
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-content: center;
+    position: absolute;
+    font-size: large;
+    right: -15%;
+    top: -40%;
 }

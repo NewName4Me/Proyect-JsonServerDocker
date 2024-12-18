@@ -1,14 +1,26 @@
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
 import { Carrito } from '../../js/entities/Carrito.js';
+import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
 async function startApp() {
     const urlParams = new URLSearchParams(location.search);
-    const categoria = urlParams.get('categoria') || 'Parameter not defined';
+    const categoria = urlParams.get('categoria');
     const mealsContainer = document.getElementById('mealsContainer');
 
-    const mealList = await new MealsRepository().getMealsFiltedByCategory(categoria);
+    let mealList = [];
+
+    //si no nos indican una categoria mostramos todos los elementos
+    if (categoria) {
+        mealList = await new MealsRepository().getMealsFiltedByCategory(categoria);
+    }
+    else {
+        mealList = await new MealsRepository().getMeals();
+    }
+
+    displayAmountOfItems();
+
     loadListOfMeals(mealList, mealsContainer);
 }
 
@@ -92,4 +104,5 @@ function mostrarModal(meal) {
 
 function agregarRecetaAlCarrito(meal) {
     new Carrito().addItem(meal);
+    displayAmountOfItems();
 }
