@@ -1,4 +1,5 @@
 import { CategoriesRepository } from '../../js/repository/CategoriesRepository.js';
+import { MealsRepository } from '../../js/repository/MealsRepository.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
@@ -14,35 +15,48 @@ async function startApp() {
  * @param {Array<Object} categories 
  * @param {HTMLElement} categoriesContainer
  */
-function loadListOfCategories(categories = [{}], categoriesContainer) {
+async function loadListOfCategories(categories = [{}], categoriesContainer) {
 
     const fragment = document.createDocumentFragment();
 
-    categories.forEach(category => {
-        fragment.appendChild(designCategory(category));
-    });
+    for (const category of categories) {
+        fragment.appendChild(await designCategory(category));
+    }
 
     categoriesContainer.appendChild(fragment);
 }
 
-function designCategory(category) {
+async function designCategory(category) {
     const { id, strCategory, strCategoryThumb, strCategoryDescription } = category;
 
     const categoryContainer = document.createElement('ARTICLE');
 
     const categoryTitle = document.createElement('H2');
     const categoryImage = document.createElement('IMG');
-    const categoryDescription = document.createElement('p');
+    const categoryDescription = document.createElement('P');
+    const verRecetasCategoria = document.createElement('A');
+    const amountOfMealsPerCategory = document.createElement('P');
 
     categoryContainer.setAttribute('data-id', id);
 
     categoryTitle.textContent = strCategory;
     categoryImage.src = strCategoryThumb;
     categoryDescription.textContent = strCategoryDescription.split('[')[0];
+    verRecetasCategoria.textContent = 'Ver recetas';
+    verRecetasCategoria.classList.add('btn', 'btn-primary');
+    verRecetasCategoria.href = `../meals?categoria=${strCategory}`;
+    amountOfMealsPerCategory.textContent = await getAmountOfMealsPerCategory(strCategory);
+
 
     categoryContainer.appendChild(categoryImage);
     categoryContainer.appendChild(categoryTitle);
     categoryContainer.appendChild(categoryDescription);
+    categoryContainer.appendChild(verRecetasCategoria);
+    categoryContainer.appendChild(amountOfMealsPerCategory);
 
-    return categoryContainer;
+    return Promise.resolve(categoryContainer);
+}
+
+async function getAmountOfMealsPerCategory(category = '') {
+    return (await new MealsRepository().getMealsFiltedByCategory(category)).length;
 }
