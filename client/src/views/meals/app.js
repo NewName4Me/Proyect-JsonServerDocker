@@ -1,6 +1,7 @@
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
 import { Carrito } from '../../js/entities/Carrito.js';
 import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
+import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../../js/utils/modalConMensaje.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
@@ -110,6 +111,7 @@ function mostrarModal(meal) {
 function agregarRecetaAlCarrito(meal) {
     new Carrito().addItem(meal);
     displayAmountOfItems();
+    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_AGREGADO_AL_CARRITO, ListaDeTiposDeAlertaEnum.SUCCESS);
 }
 
 function designListaDeIngredientes(meal) {

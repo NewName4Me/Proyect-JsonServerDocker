@@ -8,7 +8,7 @@ function modalConMensaje(msg, type) {
     alerta.classList.add(`alert-${type}`);
     alerta.textContent = msg;
     document.body.appendChild(alerta);
-    setTimeout(() => alerta.remove(), 3000);
+    setTimeout(() => alerta.remove(), 5000);
 }
 
 const ListDeMensajesDispoiblesEnum = Object.freeze({
@@ -22,3 +22,5 @@ const ListaDeTiposDeAlertaEnum = Object.freeze({
     WARNING: 'WARNING',
     ERROR: 'ERROR'
 });
+
+export { modalConMensaje, ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum };
