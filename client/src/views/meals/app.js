@@ -67,7 +67,6 @@ function designMeal(meal) {
 
     return Promise.resolve(mealCard);
 }
-
 function mostrarModal(meal) {
     const { strInstructions } = meal;
 
@@ -76,6 +75,12 @@ function mostrarModal(meal) {
     const modalImage = document.createElement('IMG');
     const modalTitle = document.createElement('H2');
     const modalInstructions = document.createElement('P');
+    const listaDeIngredientes = document.createElement('UL');
+
+    const ingredientesFragment = designListaDeIngredientes(meal);
+    if (ingredientesFragment) {
+        listaDeIngredientes.appendChild(ingredientesFragment);
+    }
 
     closeModal.textContent = 'Cerrar';
     closeModal.classList.add('btn', 'btn-primary');
@@ -87,6 +92,7 @@ function mostrarModal(meal) {
     modal.appendChild(modalImage);
     modal.appendChild(modalTitle);
     modal.appendChild(modalInstructions);
+    modal.appendChild(listaDeIngredientes);
     modal.appendChild(closeModal);
 
     document.body.appendChild(modal);
@@ -105,3 +111,20 @@ function agregarRecetaAlCarrito(meal) {
     new Carrito().addItem(meal);
     displayAmountOfItems();
 }
+
+function designListaDeIngredientes(meal) {
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        if (ingredient) {
+            const ingrdientContainer = document.createElement('LI');
+            ingrdientContainer.textContent = ingredient;
+            fragment.appendChild(ingrdientContainer);
+        } else {
+            break;
+        }
+    }
+    return fragment.children.length > 0 ? fragment : null;
+}
+
