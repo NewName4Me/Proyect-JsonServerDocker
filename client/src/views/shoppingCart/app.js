@@ -9,7 +9,6 @@ function startApp() {
     const contenedorDeItems = document.getElementById('contenedorDeItems');
     cleanHTMLElement(contenedorDeItems);
     const carrito = new Carrito().getCarrito();
-    console.log(carrito);
 
     loadCarritoItemsInContainer(carrito, contenedorDeItems);
     displayAmountOfItems();
@@ -59,8 +58,8 @@ async function designItem(itemKey, itemValue) {
     addOneMoreBtn.textContent = '+';
     removeOneMoteBtn.textContent = '-';
 
-    addOneMoreBtn.addEventListener('click', () => addOneMoreItemToCarrito(itemInfo, itemValue));
-    removeOneMoteBtn.addEventListener('click', () => removeOneItemFromCarrito(itemKey, itemValue));
+    addOneMoreBtn.addEventListener('click', () => addOneMoreItemToCarrito(itemInfo));
+    removeOneMoteBtn.addEventListener('click', () => removeOneItemFromCarrito(itemInfo));
 
     itemContainer.appendChild(imgContainer);
     itemContainer.appendChild(titleContainer);
@@ -76,11 +75,12 @@ async function designItem(itemKey, itemValue) {
     return itemContainer;
 }
 
-async function addOneMoreItemToCarrito(item, value) {
+async function addOneMoreItemToCarrito(item) {
     await new Carrito().addItem(item);
     startApp();
 }
 
-function removeOneItemFromCarrito(item, value) {
-
+async function removeOneItemFromCarrito(item) {
+    await new Carrito().removeOneItem(item);
+    startApp();
 }

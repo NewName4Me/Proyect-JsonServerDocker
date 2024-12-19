@@ -15,6 +15,15 @@ export class Carrito {
         localStorage.setItem('carritoMeals', JSON.stringify([...this.items]));
     }
 
+    removeOneItem(item) {
+        if (this.items.has(item.id) && this.items.get(item.id) > 1) {
+            this.items.set(item.id, this.items.get(item.id) - 1);
+        } else {
+            this.items.delete(item.id);
+        }
+        localStorage.setItem('carritoMeals', JSON.stringify([...this.items]));
+    }
+
     getCarrito() {
         return this.items;
     }
