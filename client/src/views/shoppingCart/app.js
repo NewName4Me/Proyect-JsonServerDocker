@@ -1,3 +1,4 @@
+//#region Imports
 import { Carrito } from '../../js/entities/Carrito.js';
 import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
@@ -5,6 +6,7 @@ import { cleanHTMLElement } from '../../js/utils/cleanHTMLElement.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
+//#region Start App
 function startApp() {
     const contenedorDeItems = document.getElementById('contenedorDeItems');
     cleanHTMLElement(contenedorDeItems);
@@ -14,6 +16,7 @@ function startApp() {
     displayAmountOfItems();
 }
 
+//#region Load Cariito Items
 /**
  * 
  * @param {Array<Object>} carrito 
@@ -28,6 +31,7 @@ async function loadCarritoItemsInContainer(carrito, contenedor) {
     contenedor.appendChild(fragment);
 }
 
+//#region Design Items
 /**
  * 
  * @param {Object} item 
@@ -75,11 +79,13 @@ async function designItem(itemKey, itemValue) {
     return itemContainer;
 }
 
+//#region Add One More Item
 async function addOneMoreItemToCarrito(item) {
     await new Carrito().addItem(item);
     startApp();
 }
 
+//#region Remove One More Item
 async function removeOneItemFromCarrito(item) {
     await new Carrito().removeOneItem(item);
     startApp();
