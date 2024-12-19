@@ -13,4 +13,9 @@ export class MealsRepository {
         const data = await fetch(`${this.#Meals_API}?strCategory=${category}`);
         return await data.json();
     }
+
+    async getMealById(id) {
+        const data = await fetch(`${this.#Meals_API}/${id}`);
+        return await data.json();
+    }
 }
