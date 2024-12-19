@@ -37,23 +37,46 @@ async function designItem(itemKey, itemValue) {
 
     const itemContainer = document.createElement('ARTICLE');
 
+    itemContainer.setAttribute('data-id', id);
+
     const imgContainer = document.createElement('IMG');
     const titleContainer = document.createElement('H2');
     const areaContainer = document.createElement('H3');
     const categoriaContainer = document.createElement('H4');
+    const cantidadMasBotonesContainer = document.createElement('DIV');
     const cantidadContainer = document.createElement('SPAN');
+    const addOneMoreBtn = document.createElement('BUTTON');
+    const removeOneMoteBtn = document.createElement('BUTTON');
 
     imgContainer.src = strMealThumb;
     titleContainer.textContent = strMeal;
     areaContainer.textContent = strArea;
     categoriaContainer.textContent = strCategory;
     cantidadContainer.textContent = itemValue;
+    addOneMoreBtn.textContent = '+';
+    removeOneMoteBtn.textContent = '-';
+
+    addOneMoreBtn.addEventListener('click', () => addOneMoreItemToCarrito(itemKey, itemValue));
+    removeOneMoteBtn.addEventListener('click', () => removeOneItemFromCarrito(itemKey, itemValue));
 
     itemContainer.appendChild(imgContainer);
     itemContainer.appendChild(titleContainer);
     itemContainer.appendChild(areaContainer);
     itemContainer.appendChild(categoriaContainer);
-    itemContainer.appendChild(cantidadContainer);
+
+    cantidadMasBotonesContainer.appendChild(removeOneMoteBtn);
+    cantidadMasBotonesContainer.appendChild(cantidadContainer);
+    cantidadMasBotonesContainer.appendChild(addOneMoreBtn);
+
+    itemContainer.appendChild(cantidadMasBotonesContainer);
 
     return itemContainer;
+}
+
+function addOneMoreItemToCarrito(item, value) {
+
+}
+
+function removeOneItemFromCarrito(item, value) {
+
 }
