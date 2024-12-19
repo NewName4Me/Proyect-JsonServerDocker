@@ -1,7 +1,7 @@
 import { Carrito } from '../entities/Carrito.js';
 
 export function displayItemsAmountInCarrito() {
-    return new Carrito().items.length;
+    return new Carrito().items.size;
 }
 
 export function displayAmountOfItems() {

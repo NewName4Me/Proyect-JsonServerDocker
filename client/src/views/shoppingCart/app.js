@@ -17,5 +17,5 @@ function startApp() {
  * @param {HTMLElement} contenedor 
  */
 function loadCarritoItemsInContainer(carrito, contenedor) {
-
+    console.log(carrito);
 }

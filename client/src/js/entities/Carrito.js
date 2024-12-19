@@ -1,14 +1,18 @@
 export class Carrito {
     constructor() {
-        this.items = [];
+        this.items = new Map();
         if (localStorage.getItem('carritoMeals')) {
-            this.items = JSON.parse(localStorage.getItem('carritoMeals'));
+            this.items = new Map(JSON.parse(localStorage.getItem('carritoMeals')));
         }
     }
 
     addItem(item) {
-        this.items.push(item);
-        localStorage.setItem('carritoMeals', JSON.stringify(this.items));
+        if (this.items.has(item.id)) {
+            this.items.set(item.id, this.items.get(item.id) + 1);
+        } else {
+            this.items.set(item.id, 1);
+        }
+        localStorage.setItem('carritoMeals', JSON.stringify([...this.items]));
     }
 
     getCarrito() {
