@@ -18,5 +18,8 @@ export class Carrito {
     getCarrito() {
         return this.items;
     }
-}
 
+    getNumeroDeItems() {
+        return [...this.items.values()].reduce((total, quantity) => total + quantity, 0);
+    }
+}
