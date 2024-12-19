@@ -1,12 +1,15 @@
 import { Carrito } from '../../js/entities/Carrito.js';
 import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
+import { cleanHTMLElement } from '../../js/utils/cleanHTMLElement.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
 function startApp() {
     const contenedorDeItems = document.getElementById('contenedorDeItems');
+    cleanHTMLElement(contenedorDeItems);
     const carrito = new Carrito().getCarrito();
+    console.log(carrito);
 
     loadCarritoItemsInContainer(carrito, contenedorDeItems);
     displayAmountOfItems();
@@ -56,7 +59,7 @@ async function designItem(itemKey, itemValue) {
     addOneMoreBtn.textContent = '+';
     removeOneMoteBtn.textContent = '-';
 
-    addOneMoreBtn.addEventListener('click', () => addOneMoreItemToCarrito(itemKey, itemValue));
+    addOneMoreBtn.addEventListener('click', () => addOneMoreItemToCarrito(itemInfo, itemValue));
     removeOneMoteBtn.addEventListener('click', () => removeOneItemFromCarrito(itemKey, itemValue));
 
     itemContainer.appendChild(imgContainer);
@@ -73,8 +76,9 @@ async function designItem(itemKey, itemValue) {
     return itemContainer;
 }
 
-function addOneMoreItemToCarrito(item, value) {
-
+async function addOneMoreItemToCarrito(item, value) {
+    await new Carrito().addItem(item);
+    startApp();
 }
 
 function removeOneItemFromCarrito(item, value) {
