@@ -97,8 +97,8 @@ async function removeOneItemFromCarrito(item) {
 }
 
 async function cargarResumenDeCompra() {
-    const resumenDeCompraContainer = document.getElementById('resumenDeCompra');
-    const precioTotal =await new Carrito().getPrecioTotalCarrito();
+    const precioTotalContainer = document.getElementById('precioTotal');
+    const precioCalculado =await new Carrito().getPrecioTotalCarrito();
     
-    resumenDeCompraContainer.textContent=`${precioTotal} $`;
+    precioTotalContainer.textContent=`${precioCalculado} $`;
 }
