@@ -3,32 +3,82 @@ import { Carrito } from '../../js/entities/Carrito.js';
 import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
 import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../../js/utils/modalConMensaje.js';
 
+// Pagination constants
+const ITEMS_PER_PAGE = 8;
+let currentPage = 1;
+let totalPages;
+let currentMeals = [];
+
 document.addEventListener('DOMContentLoaded', startApp);
 
 async function startApp() {
     const urlParams = new URLSearchParams(location.search);
     const categoria = urlParams.get('categoria');
 
-    let mealList = [];
-
     //si no nos indican una categoria mostramos todos los elementos
     if (categoria) {
-        mealList = await new MealsRepository().getMealsFiltedByCategory(categoria);
-    }
-    else {
-        mealList = await new MealsRepository().getMeals();
+        currentMeals = await new MealsRepository().getMealsFiltedByCategory(categoria);
+    } else {
+        currentMeals = await new MealsRepository().getMeals();
     }
 
     displayAmountOfItems();
-
-    loadListOfMeals(mealList, mealsContainer);
+    totalPages = Math.ceil(currentMeals.length / ITEMS_PER_PAGE);
+    loadPage(1);
 }
 
-/**
- * 
- * @param {Array<Object>} list 
- * @param {HTMLElement} container 
- */
+function loadPage(pageNumber) {
+    const startIndex = (pageNumber - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const mealsToShow = currentMeals.slice(startIndex, endIndex);
+    
+    const mealsContainer = document.getElementById('mealsContainer');
+    mealsContainer.innerHTML = '';
+    
+    loadListOfMeals(mealsToShow, mealsContainer);
+    renderPagination();
+}
+
+function renderPagination() {
+    const paginationContainer = document.getElementById('paginacion');
+    paginationContainer.innerHTML = '';
+    
+    // Previous button
+    if (currentPage > 1) {
+        const prevButton = createPaginationButton('Anterior', currentPage - 1);
+        prevButton.classList.add('btn', 'btn-primary', 'mr-2');
+        paginationContainer.appendChild(prevButton);
+    }
+    
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = createPaginationButton(i.toString(), i);
+        if (i === currentPage) {
+            pageButton.classList.add('btn', 'btn-active', 'mx-1');
+        } else {
+            pageButton.classList.add('btn', 'btn-neutral', 'mx-1');
+        }
+        paginationContainer.appendChild(pageButton);
+    }
+    
+    // Next button
+    if (currentPage < totalPages) {
+        const nextButton = createPaginationButton('Siguiente', currentPage + 1);
+        nextButton.classList.add('btn', 'btn-primary', 'ml-2');
+        paginationContainer.appendChild(nextButton);
+    }
+}
+
+function createPaginationButton(text, pageNumber) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => {
+        currentPage = pageNumber;
+        loadPage(currentPage);
+    });
+    return button;
+}
+
 async function loadListOfMeals(meals, container) {
     const fragment = document.createDocumentFragment();
 
@@ -40,7 +90,7 @@ async function loadListOfMeals(meals, container) {
 }
 
 function designMeal(meal) {
-    const { id, strMeal, strMealThumb,price } = meal;
+    const { id, strMeal, strMealThumb, price } = meal;
 
     const mealCard = document.createElement('ARTICLE');
 
@@ -71,6 +121,7 @@ function designMeal(meal) {
 
     return Promise.resolve(mealCard);
 }
+
 function mostrarModal(meal) {
     const { strInstructions } = meal;
 
@@ -131,5 +182,4 @@ function designListaDeIngredientes(meal) {
         }
     }
     return fragment.children.length > 0 ? fragment : null;
-}
-
+}   
