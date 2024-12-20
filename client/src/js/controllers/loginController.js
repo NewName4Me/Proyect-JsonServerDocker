@@ -12,11 +12,10 @@ export async function handleLoginFormSubmitController(e, form) {
     const passwordInput = form.userpassword.value;
 
     if (!(await isValidUser(emailInput, passwordInput))) {
-        alert('Usuario invalido');
-        return;
+        return false
     }
 
-    window.location.href = '../categories/';
-
     form.reset();
+
+    return true;
 }
