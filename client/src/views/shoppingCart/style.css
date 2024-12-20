@@ -1,0 +1,15 @@
+main .mainContent {
+    display: grid;
+    grid-template-columns: 1fr 40vw;
+}
+
+main .mainContent #contenedorDeItems img{
+    width: 20%;
+}
+
+main .mainContent #contenedorDeItems article{
+    display: flex;
+    padding: 1rem;
+    border: 1px solid black;
+    margin: 1rem;
+}

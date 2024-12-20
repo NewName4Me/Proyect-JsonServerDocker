@@ -14,6 +14,8 @@ function startApp() {
 
     loadCarritoItemsInContainer(carrito, contenedorDeItems);
     displayAmountOfItems();
+
+    cargarResumenDeCompra()
 }
 
 //#region Load Cariito Items
@@ -39,7 +41,7 @@ async function loadCarritoItemsInContainer(carrito, contenedor) {
 async function designItem(itemKey, itemValue) {
     const itemInfo = await new MealsRepository().getMealById(itemKey);
 
-    const { strMeal, strArea, strCategory, strMealThumb, id } = itemInfo;
+    const { strMeal, strArea, strCategory, strMealThumb, id, price } = itemInfo;
 
     const itemContainer = document.createElement('ARTICLE');
 
@@ -50,6 +52,7 @@ async function designItem(itemKey, itemValue) {
     const areaContainer = document.createElement('H3');
     const categoriaContainer = document.createElement('H4');
     const cantidadMasBotonesContainer = document.createElement('DIV');
+    const priceContainer = document.createElement('SPAN');
     const cantidadContainer = document.createElement('SPAN');
     const addOneMoreBtn = document.createElement('BUTTON');
     const removeOneMoteBtn = document.createElement('BUTTON');
@@ -58,6 +61,7 @@ async function designItem(itemKey, itemValue) {
     titleContainer.textContent = strMeal;
     areaContainer.textContent = strArea;
     categoriaContainer.textContent = strCategory;
+    priceContainer.textContent = `${price}$`;
     cantidadContainer.textContent = itemValue;
     addOneMoreBtn.textContent = '+';
     removeOneMoteBtn.textContent = '-';
@@ -68,6 +72,7 @@ async function designItem(itemKey, itemValue) {
     itemContainer.appendChild(imgContainer);
     itemContainer.appendChild(titleContainer);
     itemContainer.appendChild(areaContainer);
+    itemContainer.appendChild(priceContainer);
     itemContainer.appendChild(categoriaContainer);
 
     cantidadMasBotonesContainer.appendChild(removeOneMoteBtn);
@@ -89,4 +94,11 @@ async function addOneMoreItemToCarrito(item) {
 async function removeOneItemFromCarrito(item) {
     await new Carrito().removeOneItem(item);
     startApp();
+}
+
+async function cargarResumenDeCompra() {
+    const resumenDeCompraContainer = document.getElementById('resumenDeCompra');
+    const precioTotal =await new Carrito().getPrecioTotalCarrito();
+    
+    resumenDeCompraContainer.textContent=`${precioTotal} $`;
 }

@@ -40,7 +40,7 @@ async function loadListOfMeals(meals, container) {
 }
 
 function designMeal(meal) {
-    const { id, strMeal, strMealThumb } = meal;
+    const { id, strMeal, strMealThumb,price } = meal;
 
     const mealCard = document.createElement('ARTICLE');
 
@@ -48,6 +48,7 @@ function designMeal(meal) {
     const mealTitle = document.createElement('H2');
     const verReceta = document.createElement('BUTTON');
     const agregarReceta = document.createElement('BUTTON');
+    const priceContainer = document.createElement('SPAN');
 
     mealCard.setAttribute('data-id', id);
 
@@ -57,9 +58,11 @@ function designMeal(meal) {
     verReceta.classList.add('btn', 'btn-primary');
     agregarReceta.textContent = 'Agregar receta';
     agregarReceta.classList.add('btn', 'btn-neutral');
+    priceContainer.textContent = `${price}$`;
 
     mealCard.appendChild(mealImage);
     mealCard.appendChild(mealTitle);
+    mealCard.appendChild(priceContainer);
     mealCard.appendChild(verReceta);
     mealCard.appendChild(agregarReceta);
 

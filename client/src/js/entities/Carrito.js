@@ -1,3 +1,5 @@
+import { MealsRepository } from '../repository/MealsRepository.js';
+
 export class Carrito {
     constructor() {
         this.items = new Map();
@@ -31,4 +33,14 @@ export class Carrito {
     getNumeroDeItems() {
         return [...this.items.values()].reduce((total, quantity) => total + quantity, 0);
     }
+
+    async getPrecioTotalCarrito() {
+        const promises = [...this.items.entries()].map(async ([key, quantity]) => {
+            const item = await new MealsRepository().getMealById(key);
+            return item.price * quantity;
+        });
+        const prices = await Promise.all(promises);
+        return prices.reduce((total, price) => total + price, 0).toFixed(2);
+    }
 }
+
