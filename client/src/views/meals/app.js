@@ -13,6 +13,31 @@ let currentMeals = [];
 
 document.addEventListener('DOMContentLoaded', startApp);
 
+// Agregar event listener para el select de ordenamiento
+document.getElementById('ordenarSelect').addEventListener('change', handleSort);
+
+function handleSort(e) {
+    const sortOrder = e.target.value;
+    if (sortOrder === 'sin') {
+        // Restaurar orden original
+        startApp();
+        return;
+    }
+
+    // Ordenar meals por precio
+    currentMeals.sort((a, b) => {
+        if (sortOrder === 'asc') {
+            return a.price - b.price;
+        } else {
+            return b.price - a.price;
+        }
+    });
+
+    // Resetear a la primera página y recargar
+    currentPage = 1;
+    loadPage(1);
+}
+
 //#region Start App
 async function startApp() {
     const urlParams = new URLSearchParams(location.search);
@@ -193,4 +218,4 @@ function designListaDeIngredientes(meal) {
         }
     }
     return fragment.children.length > 0 ? fragment : null;
-}   
+}
