@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="../../../public/styles/header.css">
     <link rel="stylesheet" href="./style.css">
 
+    <!-- Enviar emails - EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("5yWVXS-eYIt2VbjPj");
+        })();
+    </script>
+
     <!--Favicon-->
     <link rel="shortcut icon" href="../../../public/icons/favicon.jpg" type="image/x-icon">
     <title>Document</title>
@@ -33,11 +41,33 @@
             <section id="resumenDeCompra">
                 <h2>Resumen de compra</h2>
                 <span id="precioTotal"></span>
+                <button id="pagar">Pagar compra</button>
             </section>
         </div>
     </main>
 
     <script src="./app.js" type="module"></script>
+    <script>
+        const pagarBtn = document.getElementById('pagar');
+        pagarBtn.addEventListener('click', e => procesarPago(e));
+
+        function procesarPago(e) {
+            e.preventDefault();
+
+            let params = {
+                user_email: 'eriktortarod@gmail.com',
+                user_name: 'erikelmejro',
+                purchase_summary: 'resumen de erik'
+            }
+
+            emailjs.send('service_41xoude', 'template_ywgv8ad', params)
+                .then(function (response) {
+                    alert('email enviado correctamente')
+                }, function (erro) {
+                    alert('error al enviar el formulario')
+                });
+        }
+    </script>
 </body>
 
 </html>
