@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', startApp);
 // Agregar event listener para el select de ordenamiento
 document.getElementById('ordenarSelect').addEventListener('change', handleSort);
 
+//#region HandleSort
 function handleSort(e) {
     const sortOrder = e.target.value;
     if (sortOrder === 'sin') {
