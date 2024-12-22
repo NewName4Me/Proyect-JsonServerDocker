@@ -1,4 +1,5 @@
 import { isValidUser } from '../utils/isValidUser.js';
+import { UserRepository } from '../repository/UserRepository.js';
 
 /**
  * 
@@ -16,6 +17,8 @@ export async function handleLoginFormSubmitController(e, form) {
     }
 
     form.reset();
+
+    new UserRepository().setUserToSesionWithEmail(emailInput);
 
     return true;
 }
