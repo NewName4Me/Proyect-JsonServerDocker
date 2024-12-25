@@ -12,6 +12,11 @@ main #about article {
     gap: 2rem;
     padding: 2rem;
     padding-top: 5rem;
+    background: var(--base-100);
+    margin: 1rem;
+    margin-top: 5.5rem;
+    padding-top: 1.5rem;
+    border-radius: 16px;
 }
 
 main #hero article p,
@@ -34,6 +39,7 @@ main #hero article button,main #about article button {
 main #hero figure img,
 main #about figure img {
     width: 130%;
+    z-index: 10;
 }
 
 #hero h1,
