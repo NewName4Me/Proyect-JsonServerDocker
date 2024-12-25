@@ -43,7 +43,7 @@ async function designItem(itemKey, itemValue) {
 
     const { strMeal, strArea, strCategory, strMealThumb, id, price } = itemInfo;
 
-    const itemContainer = document.createElement('ARTICLE');
+    const itemContainer = document.createElement('SECTION');
 
     itemContainer.setAttribute('data-id', id);
 
