@@ -145,3 +145,22 @@
         transform: translateX(100%);
     }
 }
+
+@keyframes toTheTop {
+    0% {
+        transform: translateY(100%);
+    }
+
+    20% {
+        transform: translateY(0%);
+
+    }
+
+    70% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}

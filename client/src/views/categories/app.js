@@ -40,7 +40,11 @@ async function designCategory(category) {
     const verRecetasCategoria = document.createElement('A');
     const amountOfMealsPerCategory = document.createElement('P');
 
+    const informationContainer = document.createElement('DIV');
+    informationContainer.classList.add('informationContainer');
+
     categoryContainer.setAttribute('data-id', id);
+    categoryContainer.classList.add('bxS-floating');
 
     categoryTitle.textContent = strCategory;
     categoryImage.src = strCategoryThumb;
@@ -49,13 +53,17 @@ async function designCategory(category) {
     verRecetasCategoria.classList.add('btn', 'btn-primary');
     verRecetasCategoria.href = `../meals?categoria=${strCategory}`;
     amountOfMealsPerCategory.textContent = await getAmountOfMealsPerCategory(strCategory);
+    amountOfMealsPerCategory.classList.add('amountOfMeals');
 
 
     categoryContainer.appendChild(categoryImage);
-    categoryContainer.appendChild(categoryTitle);
-    categoryContainer.appendChild(categoryDescription);
-    categoryContainer.appendChild(verRecetasCategoria);
+
+    informationContainer.appendChild(categoryTitle);
+    informationContainer.appendChild(categoryDescription);
+    informationContainer.appendChild(verRecetasCategoria);
+
     categoryContainer.appendChild(amountOfMealsPerCategory);
+    categoryContainer.appendChild(informationContainer);
 
     return Promise.resolve(categoryContainer);
 }

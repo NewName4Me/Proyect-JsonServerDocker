@@ -1,0 +1,81 @@
+h1{
+    margin: 2rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+#categoriesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem;
+}
+
+.amountOfMeals {
+    display: none;
+}
+
+#categoriesContainer article {
+    text-align: center;
+    display: grid;
+    place-content: center;
+    position: relative;
+    height: 40vh;
+    padding-left: 2vw;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+#categoriesContainer article img {
+    width: 90%;
+    transition: all 0.5s ease-in-out;
+}
+
+#categoriesContainer article:hover img{
+    filter: blur(10px);
+}
+
+#categoriesContainer article:hover .informationContainer {
+    animation: toTheTopStay 2s ease-in-out forwards;
+    opacity: 1;
+}
+
+#categoriesContainer .informationContainer {
+    position: absolute;
+    bottom: 0%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    background: rgba(0, 0, 0, 0.522);
+    height: 100%;
+    display: grid;
+    grid-template-rows: 10% 1fr 15%;
+    padding: 0.5rem;
+    gap: 1rem;
+}
+
+#categoriesContainer .informationContainer p {
+    max-height: 7em;
+    overflow-y: hidden;
+    padding-inline: 1rem;
+}
+
+#categoriesContainer .informationContainer h2{
+    color: var(--base-300);
+    font-weight: bolder;
+}
+
+#categoriesContainer .informationContainer p{
+    color: var(--base-100);
+    font-size: large;
+}
+
+@keyframes toTheTopStay {
+    0% {
+        transform: translateY(100%);
+    }
+
+    20%,
+    100% {
+        transform: translateY(0%);
+    }
+}
