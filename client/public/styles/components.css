@@ -123,6 +123,10 @@
 }
 
 
+.bxS-floating {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.363);
+}
+
 @keyframes toTheLeft {
     0% {
         transform: translateX(100%);

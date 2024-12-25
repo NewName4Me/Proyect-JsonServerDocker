@@ -1,40 +1,38 @@
-header ul {
-    display: flex;
-    align-items: center;
-    background: var(--primary);
+#header {
+    background: var(--base-100);
+    box-shadow: 0px 10px 10px lightgray;
+    padding: 0.5rem;
     position: fixed;
-    height: 15vh;
-    top: 0;
-    left: 0;
     width: 100vw;
-    gap: 2rem;
-    z-index: 10;
+    height: 6vw;
+    top: 0;
+    z-index: 9999;
 }
 
-header ul img {
-    width: 13%;
-    border-radius: 20px;
-    margin-left: 20%;
-}
-
-header ul a {
-    font-size: xx-large;
-}
-
-header ul li:last-of-type a {
-    position: relative;
-}
-
-#itemsAmount {
-    background: var(--error);
-    border-radius: 50%;
-    color: var(--base-100);
-    width: 2rem;
-    height: 2rem;
+#header ul {
     display: grid;
-    place-content: center;
-    position: absolute;
-    font-size: large;
-    right: -15%;
-    top: -40%;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    padding-inline: 1.5rem;
+}
+
+#header ul .links {
+    display: flex;
+}
+
+#header ul li {
+    margin-inline: 1rem;
+}
+
+#header ul a {
+    font-size: larger;
+    color: var(--base-content);
+}
+
+#header ul li:first-of-type img {
+    width: 30%;
+}
+
+#header ul #carrito {
+    margin-left: auto;
 }

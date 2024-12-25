@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', checkAutentication);
+/* document.addEventListener('DOMContentLoaded', checkAutentication);
 
 function checkAutentication() {
     const isAutenticated = localStorage.getItem('autenticated');
@@ -8,4 +8,4 @@ function checkAutentication() {
     }
 
     window.location.href = './views/login/';
-}
+} */

@@ -51,6 +51,10 @@ a{
     text-decoration: none;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 main{
     margin-top: 15vh;
 }

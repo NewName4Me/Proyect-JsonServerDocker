@@ -1,0 +1,69 @@
+/* HERO SECTION */
+
+main #hero,
+main #about {
+    display: flex;
+}
+
+main #hero article,
+main #about article {
+    display: grid;
+    place-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    padding-top: 5rem;
+}
+
+main #hero article p,
+main #about article p {
+    font-size: large;
+}
+
+main #hero article button,main #about article button {
+    border: none;
+    width: fit-content;
+    padding: 1rem;
+    color: var(--base-100);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+main #hero figure img,
+main #about figure img {
+    width: 130%;
+}
+
+#hero h1,
+#about h1 {
+    font-family: 'Fraunces';
+    font-size: 4rem;
+    width: 12ch;
+}
+
+#hero h1 span,
+#about h1 span {
+    color: var(--warning);
+}
+
+#hero figure,
+#about figure {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#hero figure img,
+#about figure img {
+    position: absolute;
+    left: -20%;
+    z-index: -1;
+    top: -10%;
+}
+
+/* ABOUT US */
+#about {
+    margin-top: 10rem;
+}
