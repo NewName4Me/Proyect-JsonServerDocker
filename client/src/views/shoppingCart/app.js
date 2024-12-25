@@ -63,6 +63,7 @@ async function designItem(itemKey, itemValue) {
     categoriaContainer.textContent = strCategory;
     priceContainer.textContent = `${price}$`;
     cantidadContainer.textContent = itemValue;
+    cantidadContainer.classList.add('cantidadContainer');
     addOneMoreBtn.textContent = '+';
     removeOneMoteBtn.textContent = '-';
 
@@ -87,18 +88,34 @@ async function designItem(itemKey, itemValue) {
 //#region Add One More Item
 async function addOneMoreItemToCarrito(item) {
     await new Carrito().addItem(item);
-    startApp();
+    displayAmountOfItems();
+    const mostrarPrecioElement = document.querySelector('.cantidadContainer');
+    mostrarPrecioElement.textContent = Number(mostrarPrecioElement.textContent) + 1;
 }
 
 //#region Remove One More Item
 async function removeOneItemFromCarrito(item) {
     await new Carrito().removeOneItem(item);
-    startApp();
+    displayAmountOfItems();
+    const mostrarPrecioElement = document.querySelector('.cantidadContainer');
+    mostrarPrecioElement.textContent = Number(mostrarPrecioElement.textContent) - 1;
+
+    if (Number(mostrarPrecioElement.textContent) <= 0) {
+        eliminarElementoDelDom(item);
+    }
+}
+
+function eliminarElementoDelDom(item) {
+    const itemContainer = document.querySelector(`section[data-id="${item.id}"]`);
+    if (itemContainer) {
+        itemContainer.remove();
+        cargarResumenDeCompra();
+    }
 }
 
 async function cargarResumenDeCompra() {
     const precioTotalContainer = document.getElementById('precioTotal');
-    const precioCalculado =await new Carrito().getPrecioTotalCarrito();
-    
-    precioTotalContainer.textContent=`${precioCalculado} $`;
+    const precioCalculado = await new Carrito().getPrecioTotalCarrito();
+
+    precioTotalContainer.textContent = `${precioCalculado} $`;
 }
