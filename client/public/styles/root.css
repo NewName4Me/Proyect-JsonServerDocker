@@ -4,13 +4,14 @@
     margin: 0;
 }
 
-body{
+body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: url('../img/backgroundPattern.jpg');
 }
 
-main{
+main {
     flex: 1 1 auto;
 }
 
@@ -53,18 +54,18 @@ main{
     --error-content: #000000;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-body{
+body {
     overflow-x: hidden;
 }
 
-main{
+main {
     margin-top: 15vh;
 }

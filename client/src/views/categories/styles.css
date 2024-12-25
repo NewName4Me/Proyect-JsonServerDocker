@@ -24,6 +24,7 @@ h1{
     padding-left: 2vw;
     overflow: hidden;
     border-radius: 4px;
+    background: var(--base-200);
 }
 
 #categoriesContainer article img {
