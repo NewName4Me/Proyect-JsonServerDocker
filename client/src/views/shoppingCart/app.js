@@ -3,6 +3,7 @@ import { Carrito } from '../../js/entities/Carrito.js';
 import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
 import { cleanHTMLElement } from '../../js/utils/cleanHTMLElement.js';
+import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../../js/utils/modalConMensaje.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
@@ -91,6 +92,8 @@ async function addOneMoreItemToCarrito(item) {
     displayAmountOfItems();
     const mostrarPrecioElement = document.querySelector('.cantidadContainer');
     mostrarPrecioElement.textContent = Number(mostrarPrecioElement.textContent) + 1;
+
+    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO,ListaDeTiposDeAlertaEnum.INFO);
 }
 
 //#region Remove One More Item
@@ -103,8 +106,10 @@ async function removeOneItemFromCarrito(item) {
     if (Number(mostrarPrecioElement.textContent) <= 0) {
         eliminarElementoDelDom(item);
     }
+    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO,ListaDeTiposDeAlertaEnum.INFO);
 }
 
+//#region Eliminar elemento del DOM
 function eliminarElementoDelDom(item) {
     const itemContainer = document.querySelector(`section[data-id="${item.id}"]`);
     if (itemContainer) {
@@ -113,6 +118,7 @@ function eliminarElementoDelDom(item) {
     }
 }
 
+//#region Cargar Resumen Compra
 async function cargarResumenDeCompra() {
     const precioTotalContainer = document.getElementById('precioTotal');
     const precioCalculado = await new Carrito().getPrecioTotalCarrito();
