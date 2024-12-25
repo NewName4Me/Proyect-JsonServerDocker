@@ -1,0 +1,28 @@
+footer {
+    box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.363);
+    margin-top: 7rem;
+    background: var(--base-300);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 2rem;
+    height: fit-content;
+}
+
+footer section {
+    padding: 1rem;
+}
+
+footer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin-bottom: 0.5rem;
+}

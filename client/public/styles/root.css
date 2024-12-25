@@ -4,6 +4,16 @@
     margin: 0;
 }
 
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex: 1 1 auto;
+}
+
 :root {
     --primary: #66cc8a;
     --primary-focus: #41be6d;
