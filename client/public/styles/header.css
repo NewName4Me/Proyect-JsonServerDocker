@@ -7,6 +7,7 @@
     height: 6vw;
     top: 0;
     z-index: 9999;
+    animation: toTheBottomAndStay 0.7s ease;
 }
 
 #header ul {

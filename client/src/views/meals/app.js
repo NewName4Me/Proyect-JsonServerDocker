@@ -132,9 +132,15 @@ function designMeal(meal) {
     const mealTitle = document.createElement('H2');
     const verReceta = document.createElement('BUTTON');
     const agregarReceta = document.createElement('BUTTON');
+    const btnsContainer = document.createElement('SECTION');
     const priceContainer = document.createElement('SPAN');
+    const mealCardBasicInfo = document.createElement('DIV');
+    mealCardBasicInfo.classList.add('mealCardBasicInfo');
+
+    btnsContainer.classList.add('btn-Container');
 
     mealCard.setAttribute('data-id', id);
+    mealCard.classList.add('bxS-floating');
 
     mealImage.src = strMealThumb;
     mealTitle.textContent = strMeal;
@@ -145,10 +151,14 @@ function designMeal(meal) {
     priceContainer.textContent = `${price}$`;
 
     mealCard.appendChild(mealImage);
-    mealCard.appendChild(mealTitle);
-    mealCard.appendChild(priceContainer);
-    mealCard.appendChild(verReceta);
-    mealCard.appendChild(agregarReceta);
+    mealCardBasicInfo.appendChild(mealTitle);
+    mealCardBasicInfo.appendChild(priceContainer);
+
+    btnsContainer.appendChild(verReceta);
+    btnsContainer.appendChild(agregarReceta);
+
+    mealCard.appendChild(mealCardBasicInfo);
+    mealCard.appendChild(btnsContainer);
 
     agregarReceta.addEventListener('click', () => agregarRecetaAlCarrito(meal));
     verReceta.addEventListener('click', () => mostrarModal(meal));

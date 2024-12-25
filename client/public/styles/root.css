@@ -69,3 +69,27 @@ body {
 main {
     margin-top: 15vh;
 }
+
+/* Estilo general de la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--base-100);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--base-content);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--info);
+}
+
+::-webkit-scrollbar-track-piece {
+    border: 1px solid var(--info-focus);
+}

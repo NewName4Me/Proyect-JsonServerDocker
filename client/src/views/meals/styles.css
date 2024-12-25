@@ -2,6 +2,33 @@ body {
     overflow-x: hidden;
 }
 
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Capi';
+    padding-top: 2rem;
+    color: var(--base-content);
+    position: relative;
+    animation: toTheBottomAndStay 1s ease;
+}
+
+h1:hover::after{
+    width: 20%;
+}
+
+h1::after{
+    transition: all 0.5s ease;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    display: block;
+    background: var(--warning);
+    width: 0%;
+    height: 7px;
+    border-radius: 16px;
+}
+
 #mealsContainer {
     margin-inline: 2rem;
     display: grid;
@@ -9,9 +36,30 @@ body {
     gap: 1rem;
 }
 
-#mealsContainer>article{
+#mealsContainer>article {
     border-radius: 8px;
     overflow: hidden;
+    background: var(--base-200);
+    height: fit-content;
+}
+
+.mealCardBasicInfo {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.mealCardBasicInfo h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-Container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
 }
 
 #mealsContainer img {
@@ -46,6 +94,43 @@ dialog p {
     margin-top: 1rem;
 }
 
-.modalShown{
+.modalShown {
     filter: blur(10px);
+}
+
+#paginacion {
+    margin-top: 5rem;
+    text-align: center;
+    padding-inline: 10vw;
+    background: var(--base-200);
+    margin-inline: 5rem;
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+label[for="ordenarSelect"] {
+    margin-right: 1rem;
+    font-weight: bolder;
+    color: var(--primary-dark-color);
+    font-size: 1.25rem;
+}
+
+#ordenarSelect {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: var(--base-200);
+    cursor: pointer;
+}
+
+.sortContainer {
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    background: var(--base-300);
+    width: fit-content;
+    padding: 0.8rem 1.5rem;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
 }

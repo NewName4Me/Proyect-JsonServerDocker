@@ -37,13 +37,16 @@
 
     <main>
         <h1>Meals</h1>
-        <select name="ordenarSelect" id="ordenarSelect">
-            <option value="sin">...</option>
-            <option value="asc">De menor a mayor precio</option>
-            <option value="desc">De mayor a menor precio</option>
-        </select>
+        <section class="bxS-floating sortContainer">
+            <label for="ordenarSelect">Ordenar</label>
+            <select name="ordenarSelect" id="ordenarSelect">
+                <option value="sin">Predeterminado</option>
+                <option value="asc">De menor a mayor precio</option>
+                <option value="desc">De mayor a menor precio</option>
+            </select>
+        </section>
         <section id="mealsContainer"></section>
-        <div id="paginacion"></div>
+        <div id="paginacion" class="bxS-floating"></div>
     </main>
 
     <footer>
