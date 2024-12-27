@@ -93,23 +93,23 @@ async function designItem(itemKey, itemValue) {
 async function addOneMoreItemToCarrito(item) {
     await new Carrito().addItem(item);
     displayAmountOfItems();
-    const mostrarPrecioElement = document.querySelector('.cantidadContainer');
-    mostrarPrecioElement.textContent = Number(mostrarPrecioElement.textContent) + 1;
-
-    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO, ListaDeTiposDeAlertaEnum.INFO);
+    const itemContainer = document.querySelector(`section[data-id="${item.id}"]`);
+    const cantidadContainer = itemContainer.querySelector('.cantidadContainer');
+    cantidadContainer.textContent = Number(cantidadContainer.textContent) + 1;
+    cargarResumenDeCompra(); // Update total
 }
 
-//#region Remove One More Item
 async function removeOneItemFromCarrito(item) {
     await new Carrito().removeOneItem(item);
     displayAmountOfItems();
-    const mostrarPrecioElement = document.querySelector('.cantidadContainer');
-    mostrarPrecioElement.textContent = Number(mostrarPrecioElement.textContent) - 1;
+    const itemContainer = document.querySelector(`section[data-id="${item.id}"]`);
+    const cantidadContainer = itemContainer.querySelector('.cantidadContainer');
+    cantidadContainer.textContent = Number(cantidadContainer.textContent) - 1;
 
-    if (Number(mostrarPrecioElement.textContent) <= 0) {
+    if (Number(cantidadContainer.textContent) <= 0) {
         eliminarElementoDelDom(item);
     }
-    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO, ListaDeTiposDeAlertaEnum.INFO);
+    cargarResumenDeCompra(); // Update total
 }
 
 //#region Eliminar elemento del DOM
@@ -128,5 +128,6 @@ async function cargarResumenDeCompra() {
     const precioCalculado = await new Carrito().getPrecioTotalCarrito();
 
     precioTotalContainer.textContent = `${precioCalculado} $`;
-    precioTotalConIvaContainer.textContent = `${precioCalculado + (precioCalculado * 0.21)}`;
+    precioTotalConIvaContainer.textContent = `${(Number(precioCalculado) * 1.21).toFixed(2)}$`;
+
 }
