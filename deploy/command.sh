@@ -25,5 +25,6 @@ sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # ejecutar Dockerfile en carpeta db
-sudo docker build -t /tmp/mi_repositorio/db/json-server-multi .
+cd /tmp/mi_repositorio/db/
+sudo docker build -t json-server-multi .
 sudo docker run --rm -p 3000:3000 -p 3001:3001 -p 3002:3002 json-server-multi
