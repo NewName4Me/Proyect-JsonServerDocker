@@ -99,6 +99,7 @@ async function addOneMoreItemToCarrito(item) {
     cargarResumenDeCompra(); // Update total
 }
 
+//#region Remove One More Item
 async function removeOneItemFromCarrito(item) {
     await new Carrito().removeOneItem(item);
     displayAmountOfItems();

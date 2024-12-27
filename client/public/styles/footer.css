@@ -26,3 +26,12 @@ footer ul {
 footer ul li {
     margin-bottom: 0.5rem;
 }
+
+@media (max-width: 600px) {
+    footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        padding: 1rem;
+    }
+}
