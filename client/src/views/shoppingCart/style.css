@@ -12,6 +12,10 @@ h1:hover::after {
     width: 20%;
 }
 
+main{
+    position: relative;
+}
+
 h1::after {
     transition: all 0.5s ease;
     position: absolute;
@@ -138,4 +142,10 @@ main .mainContent #contenedorDeItems section {
     border-radius: 16px;
     padding: 1rem;
     margin-top: 2rem;
+}
+
+.spinner{
+    position: absolute;
+    left: 50%;
+    top: 0;
 }

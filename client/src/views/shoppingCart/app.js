@@ -13,7 +13,9 @@ function startApp() {
     cleanHTMLElement(contenedorDeItems);
     const carrito = new Carrito().getCarrito();
 
-    loadCarritoItemsInContainer(carrito, contenedorDeItems);
+    loadCarritoItemsInContainer(carrito, contenedorDeItems).then(() => {
+        document.querySelector('.spinner').style.display = 'none';;
+    });
     displayAmountOfItems();
 
     cargarResumenDeCompra()

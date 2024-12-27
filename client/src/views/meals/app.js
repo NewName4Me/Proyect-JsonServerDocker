@@ -65,7 +65,9 @@ function loadPage(pageNumber) {
     const mealsContainer = document.getElementById('mealsContainer');
     cleanHTMLElement(mealsContainer)
 
-    loadListOfMeals(mealsToShow, mealsContainer);
+    loadListOfMeals(mealsToShow, mealsContainer).then(() => {
+        document.querySelector('.spinner').style.display = 'none';
+    });
     renderPagination();
 }
 
