@@ -1,0 +1,68 @@
+main {
+    margin: 0 !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    height: 100vh;
+}
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+#background__container {
+    background: url('../../../public/img/loginBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    z-index: 10;
+    object-fit: contain;
+    animation: appear 2s 2s ease-in-out forwards;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+@keyframes appear {
+    to {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+}
+
+main form {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.step.active {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+    pointer-events: all;
+}
+
+.step.previous {
+    transform: translateX(-100%);
+}

@@ -1,32 +1,39 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--Hojas de estilos-->
     <link rel="stylesheet" href="../../../public/styles/root.css">
     <link rel="stylesheet" href="../../../public/styles/components.css">
     <link rel="stylesheet" href="../../../public/styles/fonts.css">
     <link rel="stylesheet" href="./style.css">
-
-    <!--Favicon-->
     <link rel="shortcut icon" href="../../../public/icons/favicon.png" type="image/x-icon">
-
     <title>Document</title>
 </head>
 
 <body>
     <main>
         <form action="" name="loginForm">
-            <input type="email" name="useremail" placeholder="email">
-            <input type="password" name="userpassword" placeholder="password">
-            <input type="submit">
+            <h1>Welcome back</h1>
+            <p>Enter for the <span class="emphasis">best</span> recipes on the internet</p>
+            <div class="step step-1 active">
+                <input type="email" name="useremail" placeholder="email">
+                <button type="button" class="next-btn">Next</button>
+            </div>
+            <div class="step step-2">
+                <input type="password" name="userpassword" placeholder="password">
+                <div class="buttons">
+                    <button type="button" class="back-btn">Back</button>
+                    <input type="submit" value="Login">
+                </div>
+            </div>
         </form>
+        <section id="background__container"></section>
     </main>
-
     <script src="./app.js" type="module"></script>
 </body>
 
 </html>
+
