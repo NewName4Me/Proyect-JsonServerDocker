@@ -8,14 +8,18 @@ async function startApp() {
     const categories = await new CategoriesRepository().getCategories();
     const categoriesContainer = document.getElementById('categoriesContainer');
 
-    loadListOfCategories(categories, categoriesContainer);
+    loadListOfCategories(categories, categoriesContainer)
+        .then(() => {
+            const spinner = document.querySelector('.spinner');
+            spinner.style.display = 'none';
+        });
 
     displayAmountOfItems();
 }
 
 /**
  * 
- * @param {Array<Object} categories 
+ * @param {Array<Object>} categories 
  * @param {HTMLElement} categoriesContainer
  */
 async function loadListOfCategories(categories = [{}], categoriesContainer) {
