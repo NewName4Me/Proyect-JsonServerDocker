@@ -90,7 +90,8 @@
 
 .alert-ERROR,
 .alert-SUCCESS,
-.alert-INFO {
+.alert-INFO,
+.alert-WARNING {
     position: fixed;
     top: 20%;
     right: 0%;
@@ -112,6 +113,15 @@
 
 .alert-SUCCESS::before {
     content: url('../icons/SUCCESS.svg');
+}
+
+.alert-WARNING {
+    background: var(--warning);
+    color: var(--base-100);
+}
+
+.alert-WARNING::before {
+    content: url('../icons/WARNING.svg');
 }
 
 .alert-INFO {

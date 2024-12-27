@@ -21,7 +21,10 @@ function startApp() {
             $step1.classList.add('previous');
             $step1.classList.remove('active');
             $step2.classList.add('active');
+        } else {
+            modalConMensaje(ListDeMensajesDispoiblesEnum.EMAIL_NO_RELLENADO, ListaDeTiposDeAlertaEnum.WARNING);
         }
+
     });
 
     $backBtn.addEventListener('click', () => {

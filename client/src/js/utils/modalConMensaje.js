@@ -16,7 +16,8 @@ const ListDeMensajesDispoiblesEnum = Object.freeze({
     ITEM_ELIMINADO_DEL_CARRITO: 'Eliminado del carrito de forma exitosa',
     LOGIN_ERRONEO: 'Datos introducidos incorrectos',
     CAPTCHA_NO_SUPERADO: 'Captcha no superado, podrías ser un robot, intentalo de nuevo',
-    CAPTCHA_SUPERADO: 'Bienvenido'
+    CAPTCHA_SUPERADO: 'Bienvenido',
+    EMAIL_NO_RELLENADO: 'El email es obligatorio'
 });
 
 const ListaDeTiposDeAlertaEnum = Object.freeze({
