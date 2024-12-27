@@ -11,7 +11,6 @@ export class UserRepository {
     }
 
     async getUserByEmail(email = '') {
-        console.log(this.#Users_API);
         return (await this.getUsers()).find(u => u.email == email)
     }
 

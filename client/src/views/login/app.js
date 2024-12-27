@@ -9,6 +9,9 @@ import { handleCaptchaSubmit } from '../../js/controllers/captchaController.js';
 document.addEventListener('DOMContentLoaded', startApp);
 
 function startApp() {
+    const spinner = document.querySelector('.spinner');
+    spinner.style.display = 'none';
+
     const $loginForm = document.forms.loginForm;
     const $nextBtn = $loginForm.querySelector('.next-btn');
     const $backBtn = $loginForm.querySelector('.back-btn');
@@ -34,7 +37,12 @@ function startApp() {
     });
 
     $loginForm.addEventListener('submit', async (e) => {
-        const correct = await handleLoginFormSubmitController(e, $loginForm);
+
+        document.querySelector('.spinner').style.display = 'block';
+
+        const correct = await handleLoginFormSubmitController(e, $loginForm).then(() => {
+            document.querySelector('.spinner').style.display = 'none';
+        });
 
         if (!correct) {
             modalConMensaje(ListDeMensajesDispoiblesEnum.LOGIN_ERRONEO, ListaDeTiposDeAlertaEnum.ERROR);
