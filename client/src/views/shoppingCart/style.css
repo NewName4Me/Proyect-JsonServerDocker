@@ -1,15 +1,141 @@
-main .mainContent {
-    display: grid;
-    grid-template-columns: 1fr 40vw;
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Capi';
+    padding-top: 2rem;
+    color: var(--base-content);
+    position: relative;
+    animation: toTheBottomAndStay 1s ease;
 }
 
-main .mainContent #contenedorDeItems img{
+h1:hover::after {
     width: 20%;
 }
 
-main .mainContent #contenedorDeItems article{
-    display: flex;
+h1::after {
+    transition: all 0.5s ease;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    display: block;
+    background: var(--warning);
+    width: 0%;
+    height: 7px;
+    border-radius: 16px;
+}
+
+
+main .mainContent {
+    display: grid;
+    grid-template-columns: 1fr 40vw;
+    height: 60vh;
+    
+}
+
+main .mainContent #contenedorDeItems img {
+    width: 20%;
+}
+
+main .mainContent #contenedorDeItems section {
+    background: var(--base-300);
     padding: 1rem;
-    border: 1px solid black;
+    border-radius: 16px;
+    display: grid;
+}
+
+#contenedorDeItems {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    overflow-y: scroll;
+}
+
+
+/* Cart item section styles */
+#contenedorDeItems section {
+    background: var(--base-300);
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas:
+        "image title price"
+        "image cuisine category"
+        "image quantity quantity";
+    gap: 0.5rem;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#contenedorDeItems section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#contenedorDeItems section img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    width: 100% !important;
+    grid-area: image;
+    width: he;
+}
+
+#contenedorDeItems section h2 {
+    grid-area: title;
+
+}
+
+#contenedorDeItems section h3 {
+    grid-area: cuisine;
+
+}
+
+#contenedorDeItems section h4 {
+    grid-area: category;
+
+}
+
+#contenedorDeItems section span:not(.cantidadContainer) {
+    grid-area: price;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background:black;
+    padding: 1rem 1.5rem;
+    color: var(--base-100);
+    border-radius: 0 16px 0 0;
+    font-size: large;
+}
+
+#contenedorDeItems section div {
+    grid-area: quantity;
+}
+
+#contenedorDeItems section div button {
+    border: none;
+    font-size: large;
+    border-radius: 50%;
+    width: 2rem;
+    margin-inline: 0.5rem;
+    height: 2rem;
+    cursor: pointer;
+
+}
+
+#contenedorDeItems section .cantidadContainer {
+    font-size: 1.2rem;
+    font-weight: 500;
+    min-width: 2rem;
+    text-align: center;
+}
+
+#resumenDeCompra{
+    background: var(--base-300);
     margin: 1rem;
+    border-radius: 16px;
+    padding: 1rem;
+    margin-top: 2rem;
 }

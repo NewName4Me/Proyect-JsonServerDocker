@@ -47,6 +47,7 @@ async function designItem(itemKey, itemValue) {
     const itemContainer = document.createElement('SECTION');
 
     itemContainer.setAttribute('data-id', id);
+    itemContainer.classList.add('bxS-floating');
 
     const imgContainer = document.createElement('IMG');
     const titleContainer = document.createElement('H2');
@@ -60,13 +61,15 @@ async function designItem(itemKey, itemValue) {
 
     imgContainer.src = strMealThumb;
     titleContainer.textContent = strMeal;
-    areaContainer.textContent = strArea;
-    categoriaContainer.textContent = strCategory;
+    areaContainer.textContent = `Area: ${strArea}`;
+    categoriaContainer.textContent = `Category: ${strCategory}`;
     priceContainer.textContent = `${price}$`;
     cantidadContainer.textContent = itemValue;
     cantidadContainer.classList.add('cantidadContainer');
     addOneMoreBtn.textContent = '+';
     removeOneMoteBtn.textContent = '-';
+    addOneMoreBtn.classList.add('btn-success');
+    removeOneMoteBtn.classList.add('btn-error');
 
     addOneMoreBtn.addEventListener('click', () => addOneMoreItemToCarrito(itemInfo));
     removeOneMoteBtn.addEventListener('click', () => removeOneItemFromCarrito(itemInfo));
@@ -93,7 +96,7 @@ async function addOneMoreItemToCarrito(item) {
     const mostrarPrecioElement = document.querySelector('.cantidadContainer');
     mostrarPrecioElement.textContent = Number(mostrarPrecioElement.textContent) + 1;
 
-    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO,ListaDeTiposDeAlertaEnum.INFO);
+    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO, ListaDeTiposDeAlertaEnum.INFO);
 }
 
 //#region Remove One More Item
@@ -106,7 +109,7 @@ async function removeOneItemFromCarrito(item) {
     if (Number(mostrarPrecioElement.textContent) <= 0) {
         eliminarElementoDelDom(item);
     }
-    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO,ListaDeTiposDeAlertaEnum.INFO);
+    modalConMensaje(ListDeMensajesDispoiblesEnum.ITEM_ELIMINADO_DEL_CARRITO, ListaDeTiposDeAlertaEnum.INFO);
 }
 
 //#region Eliminar elemento del DOM
@@ -121,7 +124,9 @@ function eliminarElementoDelDom(item) {
 //#region Cargar Resumen Compra
 async function cargarResumenDeCompra() {
     const precioTotalContainer = document.getElementById('precioTotal');
+    const precioTotalConIvaContainer = document.getElementById('precioTotalConIva');
     const precioCalculado = await new Carrito().getPrecioTotalCarrito();
 
     precioTotalContainer.textContent = `${precioCalculado} $`;
+    precioTotalConIvaContainer.textContent = `${precioCalculado + (precioCalculado * 0.21)}`;
 }
