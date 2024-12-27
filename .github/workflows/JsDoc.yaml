@@ -1,0 +1,44 @@
+name: generateJsDoc
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  generate-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
+      - name: Instalar Node.js y JSDoc
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version: "20.15.1"
+
+      - run: npm install -g jsdoc
+
+      - name: Limpiar la carpeta docs (eliminar archivos generados previamente)
+        run: rm -rf Proyect-JsonServerDocker/client/docs/*
+
+      - name: Generar documentación de JSDoc
+        run: |
+          ls
+          cd client/
+          jsdoc -r ./src/js -d ./docs
+
+      - name: Configurar git
+        run: |
+          ls
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit y push de la documentación generada
+        run: |
+          ls
+          git pull
+          git add Proyect-JsonServerDocker/client/docs
+          git commit -m "Actualizar documentación JSDoc"
+          git push --force origin master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
