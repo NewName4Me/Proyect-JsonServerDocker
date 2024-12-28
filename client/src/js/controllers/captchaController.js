@@ -15,6 +15,7 @@ export function handleCaptchaSubmit(e, captcha, userInput) {
 
     modalConMensaje(ListDeMensajesDispoiblesEnum.CAPTCHA_SUPERADO, ListaDeTiposDeAlertaEnum.SUCCESS);
     setTimeout(() => {
+        sessionStorage.setItem('autentication', true);
         window.location.href = '../categories';
     }, 5000);
 }

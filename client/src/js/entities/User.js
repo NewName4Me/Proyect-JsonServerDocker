@@ -12,6 +12,7 @@ export class User {
 
     getEmail() { return this.#email; }
     getUsername() { return this.#username; }
+    getToken() { return this.#token; }
 
     setEmail(newEmail) { this.#email = newEmail; }
     setUsername(newUsername) { this.#username = newUsername; }
