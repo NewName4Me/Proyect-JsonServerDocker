@@ -12,7 +12,7 @@ h1:hover::after {
     width: 20%;
 }
 
-main{
+main {
     position: relative;
 }
 
@@ -34,7 +34,7 @@ main .mainContent {
     display: grid;
     grid-template-columns: 1fr 40vw;
     height: 60vh;
-    
+
 }
 
 main .mainContent #contenedorDeItems img {
@@ -42,7 +42,7 @@ main .mainContent #contenedorDeItems img {
 }
 
 main .mainContent #contenedorDeItems section {
-    background: var(--base-300);
+    background: var(--base-200);
     padding: 1rem;
     border-radius: 16px;
     display: grid;
@@ -107,7 +107,7 @@ main .mainContent #contenedorDeItems section {
     position: absolute;
     top: 0;
     right: 0;
-    background:black;
+    background: black;
     padding: 1rem 1.5rem;
     color: var(--base-100);
     border-radius: 0 16px 0 0;
@@ -136,7 +136,7 @@ main .mainContent #contenedorDeItems section {
     text-align: center;
 }
 
-#resumenDeCompra{
+#resumenDeCompra {
     background: var(--base-300);
     margin: 1rem;
     border-radius: 16px;
@@ -144,8 +144,67 @@ main .mainContent #contenedorDeItems section {
     margin-top: 2rem;
 }
 
-.spinner{
+.spinner {
     position: absolute;
     left: 50%;
     top: 0;
+}
+
+#resumenDeCompra {
+    background: var(--base-100);
+    border: 2px solid var(--base-300);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 1.5rem;
+}
+
+#resumenDeCompra h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--base-content);
+    border-bottom: 2px solid var(--base-300);
+    padding-bottom: 0.5rem;
+}
+
+.textContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: large;
+    color: var(--base-content);
+    font-weight: bolder;
+}
+
+#resumenDeCompra #precioTotal,
+#resumenDeCompra #precioTotalConIva,
+#resumenDeCompra #numeroDeItems {
+    font-weight: normal;
+    font-size: 1.2rem;
+    color: var(--neutral);
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+}
+
+#resumenDeCompra button#pagar {
+    background: var(--success);
+    color: var(--base-100);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#resumenDeCompra button#pagar:hover {
+    background: var(--success-focus);
+    transform: scale(1.05);
 }

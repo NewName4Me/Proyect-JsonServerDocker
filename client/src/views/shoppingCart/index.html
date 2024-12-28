@@ -51,11 +51,15 @@
         <div class="mainContent">
             <section id="contenedorDeItems"></section>
             <section id="resumenDeCompra" class="bxS-floating">
-                <h2>Resumen de compra</h2>
-                <span id="precioTotal"></span>
-                <span id="precioTotalConIva"></span>
-                <button id="pagar">Pagar compra</button>
+                <h2>Order summary</h2>
+                <div id="resumenPrecios">
+                    <p class="textContainer">Number of items: <span id="numeroDeItems"></span></p>
+                    <p class="textContainer">Subtotal: <span id="precioTotal"></span></p>
+                    <p class="textContainer">Total (IVA incl.):<span id="precioTotalConIva"></span></p>
+                </div>
+                <button id="pagar">Pay order</button>
             </section>
+
         </div>
         <div class="spinner">
             <div class="rect1"></div>

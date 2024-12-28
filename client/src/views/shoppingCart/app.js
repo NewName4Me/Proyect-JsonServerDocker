@@ -129,8 +129,10 @@ async function cargarResumenDeCompra() {
     const precioTotalContainer = document.getElementById('precioTotal');
     const precioTotalConIvaContainer = document.getElementById('precioTotalConIva');
     const precioCalculado = await new Carrito().getPrecioTotalCarrito();
+    const totalDeItems = document.getElementById('numeroDeItems');
 
     precioTotalContainer.textContent = `${precioCalculado} $`;
-    precioTotalConIvaContainer.textContent = `${(Number(precioCalculado) * 1.21).toFixed(2)}$`;
+    precioTotalConIvaContainer.textContent = `${(Number(precioCalculado) * 1.21).toFixed(2)} $`;
+    totalDeItems.textContent = await new Carrito().getNumeroDeItems();
 
 }
