@@ -27,7 +27,6 @@ function startApp() {
         } else {
             modalConMensaje(ListDeMensajesDispoiblesEnum.EMAIL_NO_RELLENADO, ListaDeTiposDeAlertaEnum.WARNING);
         }
-
     });
 
     $backBtn.addEventListener('click', () => {
@@ -37,19 +36,23 @@ function startApp() {
     });
 
     $loginForm.addEventListener('submit', async (e) => {
-
+        e.preventDefault();
         document.querySelector('.spinner').style.display = 'block';
 
-        const correct = await handleLoginFormSubmitController(e, $loginForm).then(() => {
+        try {
+            const correct = await handleLoginFormSubmitController(e, $loginForm);
             document.querySelector('.spinner').style.display = 'none';
-        });
 
-        if (!correct) {
+            if (!correct) {
+                modalConMensaje(ListDeMensajesDispoiblesEnum.LOGIN_ERRONEO, ListaDeTiposDeAlertaEnum.ERROR);
+                return;
+            }
+
+            mostrarReCaptcha();
+        } catch (error) {
+            document.querySelector('.spinner').style.display = 'none';
             modalConMensaje(ListDeMensajesDispoiblesEnum.LOGIN_ERRONEO, ListaDeTiposDeAlertaEnum.ERROR);
-            return;
         }
-
-        mostrarReCaptcha();
     });
 }
 
