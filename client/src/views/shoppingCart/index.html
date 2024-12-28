@@ -42,6 +42,9 @@
             </ul>
         </nav>
     </header>
+    <button id="logout" class="btn-secondary">
+        <img src="../../../public/icons/door.svg" alt="">
+    </button>
 
     <main>
         <h1>Carrito</h1>
@@ -102,6 +105,7 @@
     </footer>
 
     <script src="./app.js" type="module"></script>
+    <script src="../../js/controllers/logout.js"></script>
     <script>
         const pagarBtn = document.getElementById('pagar');
         pagarBtn.addEventListener('click', e => procesarPago(e));

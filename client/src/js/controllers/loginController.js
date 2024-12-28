@@ -8,7 +8,7 @@ import { UserRepository } from '../repository/UserRepository.js';
  */
 export async function handleLoginFormSubmitController(e, form) {
     e.preventDefault();
-    
+
     const emailInput = form.useremail.value;
     const passwordInput = form.userpassword.value;
 
