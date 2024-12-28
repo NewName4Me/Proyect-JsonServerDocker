@@ -57,23 +57,42 @@ function startApp() {
 }
 
 function mostrarReCaptcha() {
-    const captchaContainer = document.createElement('FORM');
+    const captchaContainer = document.createElement('form');
     captchaContainer.classList.add('captcha');
 
-    const captchaParagrap = document.createElement('P');
-    captchaParagrap.textContent = Math.random().toString(32).substring(0, 6);
+    const captchaWrapper = document.createElement('div');
+    captchaWrapper.classList.add('captcha-wrapper');
 
-    const userInput = document.createElement('INPUT');
-    userInput.type = "text";
+    const captchaParagraph = document.createElement('span');
+    captchaParagraph.classList.add('captcha-text');
+    captchaParagraph.textContent = Math.random().toString(32).substring(2, 8).toUpperCase();
 
-    const submitInput = document.createElement('INPUT');
-    submitInput.type = "submit";
+    const userInput = document.createElement('input');
+    userInput.type = 'text';
+    userInput.placeholder = 'Enter CAPTCHA';
+    userInput.classList.add('captcha-input');
 
-    captchaContainer.appendChild(captchaParagrap);
+    const refreshButton = document.createElement('button');
+    refreshButton.type = 'button';
+    refreshButton.classList.add('captcha-refresh');
+    refreshButton.textContent = '↻';
+
+    refreshButton.addEventListener('click', () => {
+        captchaParagraph.textContent = Math.random().toString(32).substring(2, 8).toUpperCase();
+    });
+
+    const submitInput = document.createElement('input');
+    submitInput.type = 'submit';
+    submitInput.value = 'Verify';
+    submitInput.classList.add('captcha-submit');
+
+    captchaWrapper.appendChild(captchaParagraph);
+    captchaWrapper.appendChild(refreshButton);
+    captchaContainer.appendChild(captchaWrapper);
     captchaContainer.appendChild(userInput);
     captchaContainer.appendChild(submitInput);
 
-    captchaContainer.addEventListener('submit', e => handleCaptchaSubmit(e, captchaParagrap.textContent, userInput.value));
+    captchaContainer.addEventListener('submit', e => handleCaptchaSubmit(e, captchaParagraph.textContent, userInput.value));
 
     document.body.appendChild(captchaContainer);
 }
