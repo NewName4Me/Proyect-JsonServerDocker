@@ -1,3 +1,4 @@
+/* Header styles */
 h1 {
     text-align: center;
     font-size: 3rem;
@@ -29,31 +30,30 @@ h1::after {
     border-radius: 16px;
 }
 
-
+/* Main content layout */
 main .mainContent {
     display: grid;
-    grid-template-columns: 1fr 40vw;
-    height: 60vh;
-
-}
-
-main .mainContent #contenedorDeItems img {
-    width: 20%;
-}
-
-main .mainContent #contenedorDeItems section {
-    background: var(--base-200);
+    grid-template-columns: 1fr;
+    gap: 2rem;
     padding: 1rem;
-    border-radius: 16px;
-    display: grid;
+    height: auto;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
+@media (min-width: 1024px) {
+    main .mainContent {
+        grid-template-columns: 1fr 400px;
+    }
+}
+
+/* Items container */
 #contenedorDeItems {
     margin-top: 2rem;
-    margin-left: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
+    max-height: 70vh;
+    padding-right: 1rem;
 }
-
 
 /* Cart item section styles */
 #contenedorDeItems section {
@@ -61,14 +61,17 @@ main .mainContent #contenedorDeItems section {
     position: relative;
     padding: 1.5rem;
     border-radius: 16px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-        "image title price"
-        "image cuisine category"
-        "image quantity quantity";
-    gap: 0.5rem;
+        "image"
+        "title"
+        "price"
+        "cuisine"
+        "category"
+        "quantity";
+    gap: 0.8rem;
     align-items: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -78,28 +81,39 @@ main .mainContent #contenedorDeItems section {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-#contenedorDeItems section img {
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    width: 100% !important;
-    grid-area: image;
-    width: he;
+@media (min-width: 640px) {
+    #contenedorDeItems section {
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-areas:
+            "image title price"
+            "image cuisine category"
+            "image quantity quantity";
+        gap: 0.5rem;
+    }
 }
 
+/* Image styling */
+#contenedorDeItems section img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 auto;
+    grid-area: image;
+}
+
+/* Cart item content styling */
 #contenedorDeItems section h2 {
     grid-area: title;
-
 }
 
 #contenedorDeItems section h3 {
     grid-area: cuisine;
-
 }
 
 #contenedorDeItems section h4 {
     grid-area: category;
-
 }
 
 #contenedorDeItems section span:not(.cantidadContainer) {
@@ -114,6 +128,7 @@ main .mainContent #contenedorDeItems section {
     font-size: large;
 }
 
+/* Quantity controls */
 #contenedorDeItems section div {
     grid-area: quantity;
 }
@@ -126,7 +141,6 @@ main .mainContent #contenedorDeItems section {
     margin-inline: 0.5rem;
     height: 2rem;
     cursor: pointer;
-
 }
 
 #contenedorDeItems section .cantidadContainer {
@@ -136,29 +150,16 @@ main .mainContent #contenedorDeItems section {
     text-align: center;
 }
 
-#resumenDeCompra {
-    background: var(--base-300);
-    margin: 1rem;
-    border-radius: 16px;
-    padding: 1rem;
-    margin-top: 2rem;
-}
-
-.spinner {
-    position: absolute;
-    z-index: 99999;
-    left: 50%;
-    top: 0;
-}
-
+/* Order summary section */
 #resumenDeCompra {
     background: var(--base-100);
     border: 2px solid var(--base-300);
     border-radius: 12px;
     padding: 2rem;
+    width: 100%;
     max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2rem auto;
+    height: fit-content;
     text-align: center;
     display: grid;
     grid-template-rows: auto auto auto;
@@ -210,7 +211,15 @@ main .mainContent #contenedorDeItems section {
     transform: scale(1.05);
 }
 
-/* Estilos del fondo del modal */
+/* Loading spinner */
+.spinner {
+    position: absolute;
+    z-index: 99999;
+    left: 50%;
+    top: 0;
+}
+
+/* Modal styles */
 .modal__facturar__pago {
     position: fixed;
     top: 0;
@@ -224,12 +233,10 @@ main .mainContent #contenedorDeItems section {
     z-index: 1000;
 }
 
-/* Ocultar el modal por defecto */
 .hidden {
     display: none;
 }
 
-/* Estilos del contenido del modal */
 .modal__content {
     background: var(--base-100);
     padding: 2rem;
@@ -241,21 +248,18 @@ main .mainContent #contenedorDeItems section {
     text-align: center;
 }
 
-/* Título del modal */
 .modal__content h2 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
     color: var(--base-content);
 }
 
-/* Estilos del formulario */
 .modal__content form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-/* Estilos de los inputs */
 .modal__content form input[type="email"] {
     padding: 0.8rem;
     border-radius: 8px;
@@ -280,7 +284,6 @@ main .mainContent #contenedorDeItems section {
     transform: scale(1.05);
 }
 
-/* Botón de cerrar */
 .modal__content .btn-close {
     position: absolute;
     top: 1rem;
@@ -295,4 +298,34 @@ main .mainContent #contenedorDeItems section {
 
 .modal__content .btn-close:hover {
     color: var(--error);
+}
+
+/* Responsive text adjustments */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 2rem;
+        padding-top: 1rem;
+    }
+
+    #contenedorDeItems section h2 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    #contenedorDeItems section h3,
+    #contenedorDeItems section h4 {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    #contenedorDeItems div {
+        margin: 0 auto;
+    }
+
+    #contenedorDeItems section span:not(.cantidadContainer) {
+        position: relative;
+        border-radius: 8px;
+        width: fit-content;
+        margin: 0 auto;
+    }
 }
