@@ -146,6 +146,7 @@ main .mainContent #contenedorDeItems section {
 
 .spinner {
     position: absolute;
+    z-index: 99999;
     left: 50%;
     top: 0;
 }

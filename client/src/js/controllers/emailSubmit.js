@@ -1,5 +1,6 @@
 import { Carrito } from '../entities/Carrito.js';
 import { MealsRepository } from '../repository/MealsRepository.js';
+import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../utils/modalConMensaje.js';
 
 /**
  * 
@@ -30,6 +31,10 @@ export async function handleEmailSubmit(e) {
 
     sendEmail(necesaryDataForEmail);
 
+    const spinner = document.querySelector('.spinner');
+    spinner.style.display = 'block';
+    spinner.style.top = '30%';
+
     e.target.reset();
 }
 
@@ -47,9 +52,17 @@ function sendEmail(data = {}) {
 
     emailjs.send('service_41xoude', 'template_ywgv8ad', params)
         .then(function (response) {
-            alert('email enviado correctamente')
+            modalConMensaje(ListDeMensajesDispoiblesEnum.EMAIL_ENVIADO_CORRECTAMENTE, ListaDeTiposDeAlertaEnum.SUCCESS);
+            document.querySelector('.spinner').style.display = 'none';
+            document.querySelector('.modal__facturar__pago').classList.add('hidden');
+            new Carrito().cleanCarrito();
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }, function (erro) {
-            alert('error al enviar el formulario')
+            modalConMensaje(ListDeMensajesDispoiblesEnum.ERROR_ENVIO_EMAIL, ListaDeTiposDeAlertaEnum.ERROR);
+            document.querySelector('.spinner').style.display = 'none';
+            document.querySelector('.modal__facturar__pago').classList.add('hidden');
         });
 
 }

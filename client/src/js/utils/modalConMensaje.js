@@ -17,7 +17,9 @@ const ListDeMensajesDispoiblesEnum = Object.freeze({
     LOGIN_ERRONEO: 'Datos introducidos incorrectos',
     CAPTCHA_NO_SUPERADO: 'Captcha no superado, podrías ser un robot, intentalo de nuevo',
     CAPTCHA_SUPERADO: 'Bienvenido',
-    EMAIL_NO_RELLENADO: 'El email es obligatorio'
+    EMAIL_NO_RELLENADO: 'El email es obligatorio',
+    EMAIL_ENVIADO_CORRECTAMENTE: 'Email enviado correctamente, revisa tu correo y gracias',
+    ERROR_ENVIO_EMAIL: 'Hubo un problema a la hora de enviar el email, pruebe de nuevo'
 });
 
 const ListaDeTiposDeAlertaEnum = Object.freeze({

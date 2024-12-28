@@ -8,6 +8,11 @@ export class Carrito {
         }
     }
 
+    cleanCarrito() {
+        this.items.clear();
+        localStorage.removeItem('carritoMeals');
+    }
+
     addItem(item) {
         if (this.items.has(item.id)) {
             this.items.set(item.id, this.items.get(item.id) + 1);
@@ -43,4 +48,5 @@ export class Carrito {
         return prices.reduce((total, price) => total + price, 0).toFixed(2);
     }
 }
+
 
