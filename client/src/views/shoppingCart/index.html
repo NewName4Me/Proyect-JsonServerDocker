@@ -68,6 +68,17 @@
             <div class="rect4"></div>
             <div class="rect5"></div>
         </div>
+        <section class="modal__facturar__pago hidden">
+            <div class="modal__content">
+                <h2>Facturar pago</h2>
+                <form id="facturarForm">
+                    <input type="email" placeholder="Introduce tu email" required name="email">
+                    <input type="submit" value="Enviar factura">
+                </form>
+                <button class="btn-close">&times;</button>
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -110,27 +121,6 @@
 
     <script src="./app.js" type="module"></script>
     <script src="../../js/controllers/logout.js"></script>
-    <script>
-        const pagarBtn = document.getElementById('pagar');
-        pagarBtn.addEventListener('click', e => procesarPago(e));
-
-        function procesarPago(e) {
-            e.preventDefault();
-
-            let params = {
-                user_email: 'eriktortarod@gmail.com',
-                user_name: 'erikelmejro',
-                purchase_summary: 'resumen de erik'
-            }
-
-            emailjs.send('service_41xoude', 'template_ywgv8ad', params)
-                .then(function (response) {
-                    alert('email enviado correctamente')
-                }, function (erro) {
-                    alert('error al enviar el formulario')
-                });
-        }
-    </script>
 </body>
 
 </html>

@@ -4,6 +4,7 @@ import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
 import { cleanHTMLElement } from '../../js/utils/cleanHTMLElement.js';
 import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../../js/utils/modalConMensaje.js';
+import { handleEmailSubmit } from '../../js/controllers/emailSubmit.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
@@ -18,7 +19,10 @@ function startApp() {
     });
     displayAmountOfItems();
 
-    cargarResumenDeCompra()
+    cargarResumenDeCompra();
+
+    const $pagarBtn = document.getElementById('pagar');
+    $pagarBtn.addEventListener('click', mostrarModalFacturarPago);
 }
 
 //#region Load Cariito Items
@@ -135,4 +139,27 @@ async function cargarResumenDeCompra() {
     precioTotalConIvaContainer.textContent = `${(Number(precioCalculado) * 1.21).toFixed(2)} $`;
     totalDeItems.textContent = await new Carrito().getNumeroDeItems();
 
+}
+
+function mostrarModalFacturarPago() {
+    const modal = document.querySelector('.modal__facturar__pago');
+    const closeModalBtn = modal.querySelector('.btn-close');
+
+    // Mostrar el modal
+    modal.classList.remove('hidden');
+
+    // Cerrar el modal al hacer clic en el botón de cerrar
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    // Cerrar el modal al hacer clic fuera del contenido
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
+    const $facturarForm = document.forms.facturarForm;
+    $facturarForm.addEventListener('submit', e => handleEmailSubmit(e));
 }
