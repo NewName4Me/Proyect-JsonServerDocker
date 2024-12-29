@@ -22,18 +22,23 @@ function startApp() {
         const email = $loginForm.useremail.value;
         if (email) {
             $step1.classList.add('previous');
-            $step1.classList.remove('active');
+            $step1.classList.remove('active', 'next');
             $step2.classList.add('active');
+            $step2.classList.remove('previous', 'next');
         } else {
             modalConMensaje(ListDeMensajesDispoiblesEnum.EMAIL_NO_RELLENADO, ListaDeTiposDeAlertaEnum.WARNING);
         }
     });
 
     $backBtn.addEventListener('click', () => {
-        $step2.classList.remove('active');
-        $step1.classList.remove('previous');
+        $step2.classList.add('next');
+        $step2.classList.remove('active', 'previous');
         $step1.classList.add('active');
+        $step1.classList.remove('previous', 'next');
     });
+
+    // Inicializar el estado de los pasos
+    $step2.classList.add('next');
 
     $loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -94,5 +99,5 @@ function mostrarReCaptcha() {
 
     captchaContainer.addEventListener('submit', e => handleCaptchaSubmit(e, captchaParagraph.textContent, userInput.value));
 
-    document.body.appendChild(captchaContainer);
+    document.querySelector('main').before(captchaContainer);
 }
