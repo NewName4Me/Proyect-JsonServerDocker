@@ -1,0 +1,71 @@
+name: deploy-destroy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
+      - name: pasar mis tokens a aws
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: "us-east-1"
+
+      - name: Hacer el set up de tf
+        uses: hashicorp/setup-terraform@v3
+
+      - name: inicializar terraform
+        working-directory: ./deploy
+        run: terraform init
+
+      - name: plan de terraform
+        working-directory: ./deploy
+        run: terraform plan -no-color
+
+      - name: apply terraform
+        working-directory: ./deploy
+        run: terraform apply -auto-approve
+
+      - name: Subir tfstate como artefacto
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: terraform-tfstate
+          path: ./deploy/terraform.tfstate
+
+  destroy: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
+      - name: Descargar tfstate como artefacto
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: terraform-tfstate
+          path: ./deploy/
+
+      - name: pasar mis tokens a aws
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: "us-east-1"
+
+      - name: Hacer el set up de tf
+        uses: hashicorp/setup-terraform@v3
+
+      - name: inicializar terraform
+        working-directory: ./deploy
+        run: terraform init
+
+      - name: destroy terraform
+        working-directory: ./deploy
+        run: terraform destroy -auto-approve
