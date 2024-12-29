@@ -69,9 +69,6 @@ form p {
     pointer-events: none;
 }
 
-#collage{
-    
-}
 
 .step.active {
     display: flex;
@@ -267,5 +264,174 @@ input[type="submit"]:hover {
     .captcha {
         width: 90%;
         max-width: none;
+    }
+
+    .collage{
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+        width: 90vw;
+        height: 90vh;
+    }
+}
+
+/* COLLAGE Imagenes */
+.collage {
+    margin-block: 2rem;
+    margin-right: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 0.2rem;
+    grid-auto-flow: row;
+    grid-template-areas:
+        ". img1 img1 img2 . ."
+        ". img1 img1 img2 img3 ."
+        "img7 img7 img7 img2 img3 img4"
+        "img8 img8 img6 img6 img6 img4"
+        "img8 img8 img9 img5 img5 img4"
+        ". img10 img9 img5 img5 ."
+        ". . img9 img11 . .";
+}
+
+.collage figure {
+    border-radius: 16px;
+    background-size: cover;
+    opacity: 0;
+    transition: scale 0.2s ease;
+}
+
+.collage figure:hover{
+    scale: 1.05;
+}
+
+.collage:has(figure:hover) figure:not(:hover){
+    scale: 0.95;
+    filter: blur(1px);
+}
+
+.img1 {
+    grid-area: img1;
+    background: url('../../../public/img/eggs.avif');
+    background-position: center;
+    animation: toTheBottomAndStayOpacity 2s forwards;
+
+}
+
+.img2 {
+    grid-area: img2;
+    background: url('../../../public/img/fish.avif');
+    animation: toTheBottomAndStayOpacity 2s 0.25s forwards;
+}
+
+.img3 {
+    grid-area: img3;
+    background: url('../../../public/img/maracrones.avif');
+    animation: toTheBottomAndStayOpacity 2s 0.5s forwards;
+}
+
+.img4 {
+    grid-area: img4;
+    background: url('../../../public/img/margarita.avif');
+    background-position: right;
+    animation: toTheLeftAndStayOpacity 2s 0.75s forwards;
+}
+
+.img5 {
+    grid-area: img5;
+    background: url('../../../public/img/oister.avif');
+    animation: toTheLeftAndStayOpacity 2s 1s forwards;
+}
+
+.img6 {
+    grid-area: img6;
+    background: url('../../../public/img/salda.avif');
+    background-position: center;
+    animation: toTheLeftAndStayOpacity 2s 1.25s forwards;
+}
+
+.img7 {
+    grid-area: img7;
+    background: url('../../../public/img/salda2.avif');
+    background-position: left;
+    animation: toTheRightAndStayOpacity 2s 1.5s forwards;
+}
+
+.img8 {
+    grid-area: img8;
+    background: url('../../../public/img/pancakes.avif');
+    background-position: center;
+    animation: toTheRightAndStayOpacity 2s 1.75s forwards;
+}
+
+.img9 {
+    grid-area: img9;
+    background: url('../../../public/img/pzza.avif');
+    background-position: right;
+    animation: toTheTopAndStayOpacity 2s 2s forwards;
+}
+
+.img10 {
+    grid-area: img10;
+    background: url('../../../public/img/meatball.avif');
+    animation: toTheTopAndStayOpacity 2s 2.25s forwards;
+}
+
+.img11 {
+    grid-area: img11;
+    background: url('../../../public/img/lasagna.avif');
+    background-position: center;
+    animation: toTheTopAndStayOpacity 2s 2.5s forwards;
+}
+
+@keyframes toTheBottomAndStayOpacity {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+@keyframes toTheLeftAndStayOpacity {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes toTheRightAndStayOpacity {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes toTheTopAndStayOpacity {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0%);
     }
 }
