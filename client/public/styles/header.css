@@ -50,6 +50,21 @@
     z-index: 999;
 }
 
+#header+#logout:hover::after {
+    font-weight: bold;
+    opacity: 1;
+    content: 'Logout';
+    position: absolute;
+    top: -70%;
+    background: var(--base-300);
+    left: 0;
+    transform: translateX(-20%);
+    border-radius: 16px;
+    color: var(--base-content);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.363);
+    padding: 0.5rem 1rem;
+}
+
 @media (max-width: 600px) {
     header {
         height: fit-content !important;
