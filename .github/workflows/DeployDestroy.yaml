@@ -60,6 +60,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git pull
           git add client/config/env.js
           git commit -m "Update API endpoints with new EC2 IP: ${{ steps.get-ip.outputs.public_ip }}"
           git push origin main
