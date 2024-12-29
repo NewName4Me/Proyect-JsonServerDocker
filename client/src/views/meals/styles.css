@@ -12,11 +12,11 @@ h1 {
     animation: toTheBottomAndStay 1s ease;
 }
 
-h1:hover::after{
+h1:hover::after {
     width: 20%;
 }
 
-h1::after{
+h1::after {
     transition: all 0.5s ease;
     position: absolute;
     left: 50%;
@@ -106,6 +106,24 @@ dialog p {
     margin-inline: 5rem;
     padding: 1rem;
     border-radius: 16px;
+}
+
+.pag-btn {
+    padding: 0.5rem;
+    font-size: large;
+    width: 2.5rem;
+    border: none;
+    border-radius: 4px;
+    margin: 0.1rem;
+    cursor: pointer;
+}
+
+.pag-btn-active {
+    background: var(--success);
+}
+
+.pag-btn-active:hover{
+    background: var(--success-focus);
 }
 
 label[for="ordenarSelect"] {

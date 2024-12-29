@@ -5,113 +5,78 @@ import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito
 import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../../js/utils/modalConMensaje.js';
 import { cleanHTMLElement } from '../../js/utils/cleanHTMLElement.js';
 
-// Pagination constants
-const ITEMS_PER_PAGE = 8;
-let currentPage = 1;
-let totalPages;
-let currentMeals = [];
-
 document.addEventListener('DOMContentLoaded', startApp);
-
-// Agregar event listener para el select de ordenamiento
-document.getElementById('ordenarSelect').addEventListener('change', handleSort);
-
-//#region HandleSort
-function handleSort(e) {
-    const sortOrder = e.target.value;
-    if (sortOrder === 'sin') {
-        // Restaurar orden original
-        startApp();
-        return;
-    }
-
-    // Ordenar meals por precio
-    currentMeals.sort((a, b) => {
-        if (sortOrder === 'asc') {
-            return a.price - b.price;
-        } else {
-            return b.price - a.price;
-        }
-    });
-
-    // Resetear a la primera página y recargar
-    currentPage = 1;
-    loadPage(1);
-}
 
 //#region Start App
 async function startApp() {
-    const urlParams = new URLSearchParams(location.search);
-    const categoria = urlParams.get('categoria');
+    loadPage(1);
 
-    //si no nos indican una categoria mostramos todos los elementos
-    if (categoria) {
-        currentMeals = await new MealsRepository().getMealsFiltedByCategory(categoria);
-    } else {
-        currentMeals = await new MealsRepository().getMeals();
-    }
+    document.getElementById('ordenarSelect').addEventListener('change', (e) => {
+        loadPage(1, null, e.target.value);
+    });
 
     displayAmountOfItems();
-    totalPages = Math.ceil(currentMeals.length / ITEMS_PER_PAGE);
-    loadPage(1);
 }
 
-//#region Load Page
-function loadPage(pageNumber) {
-    const startIndex = (pageNumber - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const mealsToShow = currentMeals.slice(startIndex, endIndex);
+async function loadPage(page, categoria = null, order = 'sin') {
+    const urlParams = new URLSearchParams(location.search);
+    if (!categoria) {
+        categoria = urlParams.get('categoria'); // Toma categoría desde los parámetros
+    }
 
     const mealsContainer = document.getElementById('mealsContainer');
-    cleanHTMLElement(mealsContainer)
+    cleanHTMLElement(mealsContainer);
 
-    loadListOfMeals(mealsToShow, mealsContainer).then(() => {
-        document.querySelector('.spinner').style.display = 'none';
-    });
-    renderPagination();
-}
+    let currentMeals;
 
-//#region Render Paginacion
-function renderPagination() {
-    const paginationContainer = document.getElementById('paginacion');
-    paginationContainer.innerHTML = '';
-
-    // Previous button
-    if (currentPage > 1) {
-        const prevButton = createPaginationButton('Anterior', currentPage - 1);
-        prevButton.classList.add('btn', 'btn-primary', 'mr-2');
-        paginationContainer.appendChild(prevButton);
+    if (categoria) {
+        currentMeals = await new MealsRepository().getMealsFiltedByCategory(categoria, page, 8, order);
+    } else {
+        currentMeals = await new MealsRepository().getMeals(page, 8, order);
     }
 
-    // Page numbers
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = createPaginationButton(i.toString(), i);
+    if (currentMeals && currentMeals.data.length > 0) {
+        loadListOfMeals(currentMeals.data, mealsContainer).then(() => {
+            document.querySelector('.spinner').style.display = 'none';
+        });
+        loadPagination(currentMeals.pages, page, categoria); // Incluye la categoría
+    } else {
+        mealsContainer.textContent = 'No se encontraron resultados.';
+    }
+}
+
+
+function loadPagination(pages, currentPage = 1, categoria = null) {
+    const $paginacion = document.getElementById('paginacion');
+    cleanHTMLElement($paginacion);
+
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 1; i <= pages; i++) {
+        const pagBtn = document.createElement('BUTTON');
+        pagBtn.textContent = i;
+        pagBtn.classList.add('btn-secondary', 'pag-btn');
+
         if (i === currentPage) {
-            pageButton.classList.add('btn', 'btn-secondary');
-        } else {
-            pageButton.classList.add('btn', 'btn-neutral');
+            pagBtn.classList.add('pag-btn-active');
         }
-        paginationContainer.appendChild(pageButton);
+
+        pagBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+
+            loadPage(i, categoria);
+        });
+
+        fragment.appendChild(pagBtn);
     }
 
-    // Next button
-    if (currentPage < totalPages) {
-        const nextButton = createPaginationButton('Siguiente', currentPage + 1);
-        nextButton.classList.add('btn', 'btn-primary');
-        paginationContainer.appendChild(nextButton);
-    }
+    $paginacion.appendChild(fragment);
 }
 
-//#region Create Paginacion Btns
-function createPaginationButton(text, pageNumber) {
-    const button = document.createElement('button');
-    button.textContent = text;
-    button.addEventListener('click', () => {
-        currentPage = pageNumber;
-        loadPage(currentPage);
-    });
-    return button;
-}
+
 
 //#region Load Meals
 async function loadListOfMeals(meals, container) {
