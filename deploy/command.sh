@@ -3,10 +3,11 @@
 # instalaciones
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install -y nodejs npm git
+sudo apt install -y nodejs npm git apache2 apache2-utils openssl
 sudo npm i -g json-server
 sudo npm i -g n
 sudo n latest
+sudo systemctl restart apache2
 
 # tomar todo del repositorio
 sudo git clone https://github.com/NewName4Me/Proyect-JsonServerDocker.git /tmp/mi_repositorio
@@ -24,7 +25,11 @@ echo \
 sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-# ejecutar Dockerfile en carpeta db
+#configuracion servidor apache con pagina web
+sudo rm -rf /var/www/html/* 
+sudo cp -r /tmp/mi_repositorio/client/ /var/www/html/
+
+# ejecutar Dockerfile en carpeta db(esto debe ejecutarse al final siempre)
 cd /tmp/mi_repositorio/db/
 sudo docker build -t json-server-multi .
 sudo docker run --rm -p 3000:3000 -p 3001:3001 -p 3002:3002 json-server-multi
