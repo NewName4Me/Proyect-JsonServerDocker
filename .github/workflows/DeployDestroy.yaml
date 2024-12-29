@@ -33,6 +33,16 @@ jobs:
         working-directory: ./deploy
         run: terraform apply -auto-approve
 
+      - name: Obtener IP pública
+        working-directory: ./deploy
+        id: get-ip
+        run: |
+          echo "public_ip=$(terraform output -raw ec2_instance_public_ip)" >> $GITHUB_OUTPUT
+
+      - name: Mostrar IP pública
+        run: |
+          echo "La IP pública de la instancia EC2 es: ${{ steps.get-ip.outputs.public_ip }}"
+
       - name: Subir tfstate como artefacto
         uses: actions/upload-artifact@v4.4.3
         with:
