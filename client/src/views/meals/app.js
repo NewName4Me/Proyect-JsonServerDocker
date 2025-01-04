@@ -117,10 +117,9 @@ async function loadListOfMeals(meals, container) {
  * @returns 
  */
 function designMeal(meal) {
-    const { id, strMeal, strMealThumb, price } = meal;
+    const { id, strMeal, strMealThumb, price, strTags, strCategory } = meal;
 
     const mealCard = document.createElement('ARTICLE');
-
     const mealImage = document.createElement('IMG');
     const mealTitle = document.createElement('H2');
     const verReceta = document.createElement('BUTTON');
@@ -128,9 +127,28 @@ function designMeal(meal) {
     const btnsContainer = document.createElement('SECTION');
     const priceContainer = document.createElement('SPAN');
     const mealCardBasicInfo = document.createElement('DIV');
-    mealCardBasicInfo.classList.add('mealCardBasicInfo');
+    const tagsContainer = document.createElement('DIV');
 
+    mealCardBasicInfo.classList.add('mealCardBasicInfo');
+    tagsContainer.classList.add('tagsContainer');
     btnsContainer.classList.add('btn-Container');
+
+    // Agregar tags si existen
+    if (strTags) {
+        const tags = strTags.split(',');
+        tags.forEach(tag => {
+            const tagSpan = document.createElement('SPAN');
+            tagSpan.textContent = tag.trim();
+            tagSpan.classList.add('tag');
+            tagsContainer.appendChild(tagSpan);
+        });
+
+    }
+    const categoryAsTag = document.createElement('SPAN');
+    categoryAsTag.textContent = strCategory;
+    categoryAsTag.classList.add('tag', 'bxS-floating');
+
+    tagsContainer.appendChild(categoryAsTag);
 
     mealCard.setAttribute('data-id', id);
     mealCard.classList.add('bxS-floating');
@@ -138,19 +156,19 @@ function designMeal(meal) {
     mealImage.src = strMealThumb;
     mealTitle.textContent = strMeal;
     verReceta.textContent = 'Ver receta';
-    verReceta.classList.add('btn', 'btn-primary');
+    verReceta.classList.add('btn', 'btn-primary', 'bxS-floating');
     agregarReceta.textContent = 'Agregar receta';
-    agregarReceta.classList.add('btn', 'btn-neutral');
-    priceContainer.textContent = `${price}$`;
+    agregarReceta.classList.add('btn', 'btn-neutral', 'bxS-floating');
+    priceContainer.textContent = `${price} $`;
+    priceContainer.classList.add('priceContainer', 'btn-success', 'bxS-floating');
 
     mealCard.appendChild(mealImage);
     mealCardBasicInfo.appendChild(mealTitle);
     mealCardBasicInfo.appendChild(priceContainer);
-
+    mealCard.appendChild(mealCardBasicInfo);
+    mealCard.appendChild(tagsContainer);
     btnsContainer.appendChild(verReceta);
     btnsContainer.appendChild(agregarReceta);
-
-    mealCard.appendChild(mealCardBasicInfo);
     mealCard.appendChild(btnsContainer);
 
     agregarReceta.addEventListener('click', () => agregarRecetaAlCarrito(meal));
@@ -158,21 +176,39 @@ function designMeal(meal) {
 
     return Promise.resolve(mealCard);
 }
-
 //#region Mostrar Modal
 /**
  * modal que muestra los detalles de nuestra comida con los botones adecuados para poder cerrar
  * @param {Object} meal 
  */
 function mostrarModal(meal) {
-    const { strInstructions } = meal;
+    const { strInstructions, strArea, strYoutube } = meal;
 
     const modal = document.createElement('DIALOG');
+    const modalContent = document.createElement('DIV');
     const closeModal = document.createElement('BUTTON');
     const modalImage = document.createElement('IMG');
     const modalTitle = document.createElement('H2');
     const modalInstructions = document.createElement('P');
     const listaDeIngredientes = document.createElement('UL');
+    const infoAdicional = document.createElement('DIV');
+
+    modalContent.classList.add('modal-content');
+    infoAdicional.classList.add('info-adicional');
+
+    // Agregar área y enlace de YouTube
+    const areaSpan = document.createElement('SPAN');
+    areaSpan.innerHTML = `<strong>Origen:</strong> ${strArea}`;
+    infoAdicional.appendChild(areaSpan);
+
+    if (strYoutube) {
+        const youtubeLink = document.createElement('A');
+        youtubeLink.href = strYoutube;
+        youtubeLink.target = '_blank';
+        youtubeLink.classList.add('youtube-link');
+        youtubeLink.innerHTML = '<strong>Ver en YouTube</strong> <span class="videoIcon">🎥</span>';
+        infoAdicional.appendChild(youtubeLink);
+    }
 
     const ingredientesFragment = designListaDeIngredientes(meal);
     if (ingredientesFragment) {
@@ -187,10 +223,12 @@ function mostrarModal(meal) {
     modalInstructions.textContent = strInstructions.split('[')[0];
 
     modal.appendChild(modalImage);
-    modal.appendChild(modalTitle);
-    modal.appendChild(modalInstructions);
-    modal.appendChild(listaDeIngredientes);
-    modal.appendChild(closeModal);
+    modalContent.appendChild(modalTitle);
+    modalContent.appendChild(infoAdicional);
+    modalContent.appendChild(modalInstructions);
+    modalContent.appendChild(listaDeIngredientes);
+    modalContent.appendChild(closeModal);
+    modal.appendChild(modalContent);
 
     document.body.appendChild(modal);
 
@@ -202,6 +240,11 @@ function mostrarModal(meal) {
     document.getElementById('mealsContainer').classList.add('modalShown');
 
     modal.showModal();
+
+    modal.scrollTo({
+        top: 0,
+        behavior: 'auto'
+    });
 }
 
 //#region Add To Carrito

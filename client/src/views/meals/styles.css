@@ -40,7 +40,8 @@ h1::after {
     border-radius: 8px;
     overflow: hidden;
     background: var(--base-200);
-    height: fit-content;
+    min-height: fit-content;
+    position: relative;
 }
 
 .mealCardBasicInfo {
@@ -66,32 +67,168 @@ h1::after {
     width: 100%;
 }
 
+.priceContainer{
+    position: absolute;
+    top: 3%;
+    right: 4%;
+    padding: 0.5rem 1rem;
+    color: var(--base-100);
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: large;
+    cursor: default;
+}
+
+.priceContainer:hover{
+    background: var(--success);
+}
+
+
+/* Base modal styles */
 dialog {
     border: none;
-    border-radius: 1rem;
-    padding: 1rem;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 1.5rem;
+    padding: 0;
+    background-color: var(--base-100);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50vw;
+    width: 65vw;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
+/* Modal header section with image */
 dialog img {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 1.5rem 1.5rem 0 0;
 }
 
+/* Content container */
+dialog .modal-content {
+    padding: 2rem;
+}
+
+/* Modal title */
 dialog h2 {
-    margin-top: 1rem;
+    margin: 0 0 1.5rem 0;
+    font-size: 2rem;
+    color: var(--base-content);
+    font-family: 'Capi';
+    position: relative;
+    padding-bottom: 0.75rem;
 }
 
+dialog h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--warning);
+    border-radius: 2px;
+}
+
+/* Instructions text */
 dialog p {
-    margin-top: 1rem;
+    margin: 1.5rem 0;
+    line-height: 1.6;
+    color: var(--base-content);
+}
+
+/* Ingredients list */
+dialog ul {
+    background: var(--base-200);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    margin: 1.5rem 0;
+}
+
+dialog li {
+    margin: 0.75rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+dialog li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--warning);
+}
+
+/* Close button */
+dialog .btn {
+    display: block;
+    margin: 2rem auto 0.5rem;
+    min-width: 120px;
+    transition: transform 0.2s ease;
+}
+
+dialog .btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Estilos para los tags en la tarjeta */
+.tagsContainer {
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-block: -0.5rem;
+}
+
+.tag {
+    background:#bba;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size:1rem;
+    font-weight: 500;
+}
+
+/* Estilos para la información adicional en el modal */
+.info-adicional {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--base-200);
+    border-radius: 0.5rem;
+    align-items: center;
+}
+
+.info-adicional .videoIcon{
+    padding-bottom: 0.5rem;
+    font-size: larger;
+}
+
+.info-adicional span {
+    color: var(--base-content);
+}
+
+.youtube-link {
+    color: var(--error);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.youtube-link:hover {
+    color: var(--error-focus);
+}
+
+/* Ajuste para el espacio entre los tags y los botones */
+.btn-Container {
+    margin-top: 0.5rem;
 }
 
 .modalShown {
