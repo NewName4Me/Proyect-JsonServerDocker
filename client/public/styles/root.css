@@ -66,6 +66,22 @@ body {
     overflow-x: hidden;
 }
 
+h2,h3,h4,h5,h6{
+    font-family: 'Fraunces';
+}
+
+p,button{
+    font-family: 'Poppins';
+}
+
+a,li{
+    font-family: 'Orelega_One';
+}
+
+span{
+    font-family: 'Open_Sans';
+}
+
 main {
     margin-top: 15vh;
 }
