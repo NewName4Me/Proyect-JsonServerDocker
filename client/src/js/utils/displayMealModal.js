@@ -77,7 +77,7 @@ export function mostrarModal(meal) {
 /**
  * function que le da estilos a la lista de ingredientes que tenemos para cada comida
  * @param {Object} meal 
- * @returns {HTMLElement || null}
+ * @returns {HTMLElement}
  */
 function designListaDeIngredientes(meal) {
     const fragment = document.createDocumentFragment();
