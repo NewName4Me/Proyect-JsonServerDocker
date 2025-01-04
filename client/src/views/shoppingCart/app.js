@@ -5,6 +5,7 @@ import { MealsRepository } from '../../js/repository/MealsRepository.js';
 import { cleanHTMLElement } from '../../js/utils/cleanHTMLElement.js';
 import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../../js/utils/modalConMensaje.js';
 import { handleEmailSubmit } from '../../js/controllers/emailSubmit.js';
+import { mostrarModal } from '../../js/utils/displayMealModal.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
@@ -91,6 +92,12 @@ async function designItem(itemKey, itemValue) {
     cantidadMasBotonesContainer.appendChild(addOneMoreBtn);
 
     itemContainer.appendChild(cantidadMasBotonesContainer);
+
+    itemContainer.addEventListener('click', async (e) => {
+        const mealId = e.currentTarget.getAttribute('data-id');
+        const mealData = await new MealsRepository().getMealById(mealId);
+        mostrarModal(mealData);
+    });
 
     return itemContainer;
 }

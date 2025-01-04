@@ -57,6 +57,7 @@ main .mainContent {
 
 /* Cart item section styles */
 #contenedorDeItems section {
+    cursor: pointer;
     background: var(--base-300);
     position: relative;
     padding: 1.5rem;
