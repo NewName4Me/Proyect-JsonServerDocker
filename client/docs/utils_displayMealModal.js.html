@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/displayMealModal.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/displayMealModal.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//#region Mostrar Modal
+/**
+ * modal que muestra los detalles de nuestra comida con los botones adecuados para poder cerrar
+ * @param {Object} meal 
+ */
+export function mostrarModal(meal) {
+    console.log(meal);
+    const { strInstructions, strArea, strYoutube } = meal;
+
+    const modal = document.createElement('DIALOG');
+    const modalContent = document.createElement('DIV');
+    const closeModal = document.createElement('BUTTON');
+    const modalImage = document.createElement('IMG');
+    const modalTitle = document.createElement('H2');
+    const modalInstructions = document.createElement('P');
+    const listaDeIngredientes = document.createElement('UL');
+    const infoAdicional = document.createElement('DIV');
+
+    modalContent.classList.add('modal-content');
+    infoAdicional.classList.add('info-adicional');
+
+    // Agregar área y enlace de YouTube
+    const areaSpan = document.createElement('SPAN');
+    areaSpan.innerHTML = `&lt;strong>Origen:&lt;/strong> ${strArea}`;
+    infoAdicional.appendChild(areaSpan);
+
+    if (strYoutube) {
+        const youtubeLink = document.createElement('A');
+        youtubeLink.href = strYoutube;
+        youtubeLink.target = '_blank';
+        youtubeLink.classList.add('youtube-link');
+        youtubeLink.innerHTML = '&lt;strong>Ver en YouTube&lt;/strong> &lt;span class="videoIcon">🎥&lt;/span>';
+        infoAdicional.appendChild(youtubeLink);
+    }
+
+    const ingredientesFragment = designListaDeIngredientes(meal);
+    if (ingredientesFragment) {
+        listaDeIngredientes.appendChild(ingredientesFragment);
+    }
+
+    closeModal.textContent = 'Cerrar';
+    closeModal.classList.add('btn', 'btn-info');
+
+    modalImage.src = meal.strMealThumb;
+    modalTitle.textContent = meal.strMeal;
+    modalInstructions.textContent = strInstructions.split('[')[0];
+
+    modal.appendChild(modalImage);
+    modalContent.appendChild(modalTitle);
+    modalContent.appendChild(infoAdicional);
+    modalContent.appendChild(modalInstructions);
+    modalContent.appendChild(listaDeIngredientes);
+    modalContent.appendChild(closeModal);
+    modal.appendChild(modalContent);
+
+    document.body.appendChild(modal);
+
+    closeModal.addEventListener('click', () => {
+        modal.close();
+        document.getElementById('mealsContainer').classList.remove('modalShown');
+    });
+
+    const mealContaier = document.getElementById('mealsContainer');
+    if (mealContaier) {
+        mealContaier.classList.add('modalShown');
+    }
+
+    modal.showModal();
+
+    modal.scrollTo({
+        top: 0,
+        behavior: 'auto'
+    });
+}
+
+//#region Design Lista Ingredientes
+/**
+ * function que le da estilos a la lista de ingredientes que tenemos para cada comida
+ * @param {Object} meal 
+ * @returns {HTMLElement}
+ */
+function designListaDeIngredientes(meal) {
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 1; i &lt;= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        if (ingredient) {
+            const ingrdientContainer = document.createElement('LI');
+            ingrdientContainer.textContent = ingredient;
+            fragment.appendChild(ingrdientContainer);
+        } else {
+            break;
+        }
+    }
+    return fragment.children.length > 0 ? fragment : null;
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#cleanHTMLElement">cleanHTMLElement</a></li><li><a href="global.html#designListaDeIngredientes">designListaDeIngredientes</a></li><li><a href="global.html#displayAmountOfItems">displayAmountOfItems</a></li><li><a href="global.html#displayItemsAmountInCarrito">displayItemsAmountInCarrito</a></li><li><a href="global.html#handleCaptchaSubmit">handleCaptchaSubmit</a></li><li><a href="global.html#handleEmailSubmit">handleEmailSubmit</a></li><li><a href="global.html#handleLoginFormSubmitController">handleLoginFormSubmitController</a></li><li><a href="global.html#isValidUser">isValidUser</a></li><li><a href="global.html#modalConMensaje">modalConMensaje</a></li><li><a href="global.html#mostrarModal">mostrarModal</a></li><li><a href="global.html#sendEmail">sendEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Jan 04 2025 19:33:36 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
