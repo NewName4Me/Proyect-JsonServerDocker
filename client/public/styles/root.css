@@ -70,6 +70,12 @@ main {
     margin-top: 15vh;
 }
 
+@media (max-width: 600px) {
+    main {
+        margin-top: 5vh;
+    }
+}
+
 /* Estilo general de la barra de desplazamiento */
 ::-webkit-scrollbar {
     width: 12px;
