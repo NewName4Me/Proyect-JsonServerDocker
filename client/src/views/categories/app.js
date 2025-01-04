@@ -1,24 +1,29 @@
+//#region Imports
 import { CategoriesRepository } from '../../js/repository/CategoriesRepository.js';
 import { MealsRepository } from '../../js/repository/MealsRepository.js';
 import { displayAmountOfItems } from '../../js/utils/displayItemsAmountInCarrito.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
+//#region Start App
 async function startApp() {
     const categories = await new CategoriesRepository().getCategories();
     const categoriesContainer = document.getElementById('categoriesContainer');
 
+    //despues de cargar todas las categorias ocultamos el spinner
     loadListOfCategories(categories, categoriesContainer)
         .then(() => {
             const spinner = document.querySelector('.spinner');
             spinner.style.display = 'none';
         });
 
-    displayAmountOfItems();
+    displayAmountOfItems(); //muestra la cantidad de items que tenemos en el carrito
 }
 
+//#region Load Categories
 /**
- * 
+ * function que carga todas las categorias dadas en el container indicado usando un fragment para 
+ * mayor eficiencia
  * @param {Array<Object>} categories 
  * @param {HTMLElement} categoriesContainer
  */
@@ -33,6 +38,12 @@ async function loadListOfCategories(categories = [{}], categoriesContainer) {
     categoriesContainer.appendChild(fragment);
 }
 
+//#region Design Category
+/**
+ * functión encargada de darle los estilos a cada uno de las categorias existentes
+ * @param {Object} category 
+ * @returns {HTMLElement}
+ */
 async function designCategory(category) {
     const { id, strCategory, strCategoryThumb, strCategoryDescription } = category;
 
@@ -72,6 +83,12 @@ async function designCategory(category) {
     return Promise.resolve(categoryContainer);
 }
 
+//#region Get Amount Meals
+/**
+ * function que nos retorna el numero total de comidas disponibles para cada comida
+ * @param {String} category 
+ * @returns 
+ */
 async function getAmountOfMealsPerCategory(category = '') {
     return (await new MealsRepository().getMealsFiltedByCategory(category)).length;
 }

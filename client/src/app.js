@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', startApp);
 
+//#region Start App
 function startApp() {
     const btnList = document.querySelectorAll('BUTTON');
     btnList.forEach(btn => btn.addEventListener('click', e => checkAutentication(e)));
@@ -8,8 +9,10 @@ function startApp() {
     checkAuthItems.forEach(item => item.addEventListener('click', e => checkAutentication(e)));
 }
 
+//region Check Autentication
 /**
- * 
+ *  funcion encargada de comprobar si el usuario esta ya o no autenticado, si no lo esta
+ * le redirijimos a la página de login si no le muestra la página de categorias
  * @param {Event} e 
  */
 function checkAutentication(e) {

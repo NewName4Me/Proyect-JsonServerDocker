@@ -1,9 +1,12 @@
+//#region Imports
 import { Carrito } from '../entities/Carrito.js';
 import { MealsRepository } from '../repository/MealsRepository.js';
 import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../utils/modalConMensaje.js';
 
+//#region Handle Email Submit
 /**
- * 
+ *  funcino que toma los datos necesarios del carrito de nuestro usuario para así
+ * poder mandarla un correo con la información adecuada
  * @param {Event} e 
  */
 export async function handleEmailSubmit(e) {
@@ -38,6 +41,12 @@ export async function handleEmailSubmit(e) {
     e.target.reset();
 }
 
+//#region Send Email
+/**
+ * dados unos datos envia un email mediante el servicio emailJs mostrando y ocultando un spinner y limpiando 
+ * el aspecto del carrito
+ * @param {Object} data 
+ */
 function sendEmail(data = {}) {
 
     const { emailInserted, userName, carritoUsuarioParseado, precioTexto, precioTextoConIva } = data;

@@ -15,7 +15,7 @@ function startApp() {
     const carrito = new Carrito().getCarrito();
 
     loadCarritoItemsInContainer(carrito, contenedorDeItems).then(() => {
-        document.querySelector('.spinner').style.display = 'none';;
+        document.querySelector('.spinner').style.display = 'none';
     });
     displayAmountOfItems();
 
@@ -27,7 +27,7 @@ function startApp() {
 
 //#region Load Cariito Items
 /**
- * 
+ *  functino que muestra todo lo que tenemos en nuestro carrito utilizando un fragmento para mayor eficientcia
  * @param {Array<Object>} carrito 
  * @param {HTMLElement} contenedor 
  */
@@ -42,7 +42,7 @@ async function loadCarritoItemsInContainer(carrito, contenedor) {
 
 //#region Design Items
 /**
- * 
+ * function que le da estilos basicos a cada uno lo elementos de nuestro carrito
  * @param {Object} item 
  */
 async function designItem(itemKey, itemValue) {
@@ -96,6 +96,11 @@ async function designItem(itemKey, itemValue) {
 }
 
 //#region Add One More Item
+/**
+ * function que se activa al pulsar un boton, y le suma a uno de los items de nuestro carrito uno más,
+ * luego actualiza la apariencia del contenido de la página para que refleje correctamente este cambio
+ * @param {Object} item 
+ */
 async function addOneMoreItemToCarrito(item) {
     await new Carrito().addItem(item);
     displayAmountOfItems();
@@ -106,6 +111,11 @@ async function addOneMoreItemToCarrito(item) {
 }
 
 //#region Remove One More Item
+/**
+ * function que se activa al pulsar un boton, y le resta a uno de los items de nuestro carrito uno más,
+ * luego actualiza la apariencia del contenido de la página para que refleje correctamente este cambio
+ * @param {Object} item 
+ */
 async function removeOneItemFromCarrito(item) {
     await new Carrito().removeOneItem(item);
     displayAmountOfItems();
@@ -120,6 +130,11 @@ async function removeOneItemFromCarrito(item) {
 }
 
 //#region Eliminar elemento del DOM
+/**
+ * funcion que se activa cuando uno de nuestros objetos tiene una cantidad de 0, cuando llega este caso debemos eliminarlo
+ * del DOM, en lugar de poner que nos quedan 0
+ * @param {Object} item 
+ */
 function eliminarElementoDelDom(item) {
     const itemContainer = document.querySelector(`section[data-id="${item.id}"]`);
     if (itemContainer) {
@@ -129,6 +144,10 @@ function eliminarElementoDelDom(item) {
 }
 
 //#region Cargar Resumen Compra
+/**
+ * carga los datos necesarios de nuestra compra, como el precio total, el numero de items,
+ * el precio con IVA
+ */
 async function cargarResumenDeCompra() {
     const precioTotalContainer = document.getElementById('precioTotal');
     const precioTotalConIvaContainer = document.getElementById('precioTotalConIva');
@@ -138,9 +157,13 @@ async function cargarResumenDeCompra() {
     precioTotalContainer.textContent = `${precioCalculado} $`;
     precioTotalConIvaContainer.textContent = `${(Number(precioCalculado) * 1.21).toFixed(2)} $`;
     totalDeItems.textContent = await new Carrito().getNumeroDeItems();
-
 }
 
+//#region Show Modal Facturar
+/**
+ * muestra un modal donde podrán insertar su correo donde se les enviará posteriormente un mensaje
+ * con el resumen de compra
+ */
 function mostrarModalFacturarPago() {
     const modal = document.querySelector('.modal__facturar__pago');
     const closeModalBtn = modal.querySelector('.btn-close');

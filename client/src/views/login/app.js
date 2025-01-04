@@ -1,3 +1,4 @@
+//#regino Imports
 import { handleLoginFormSubmitController } from '../../js/controllers/loginController.js';
 import {
     ListDeMensajesDispoiblesEnum,
@@ -8,6 +9,7 @@ import { handleCaptchaSubmit } from '../../js/controllers/captchaController.js';
 
 document.addEventListener('DOMContentLoaded', startApp);
 
+//#region Start App
 function startApp() {
     const spinner = document.querySelector('.spinner');
     spinner.style.display = 'none';
@@ -18,6 +20,7 @@ function startApp() {
     const $step1 = $loginForm.querySelector('.step-1');
     const $step2 = $loginForm.querySelector('.step-2');
 
+    //boton para hacer el login dinamico y que se mueva todo a la derecha de un input a otro
     $nextBtn.addEventListener('click', () => {
         const email = $loginForm.useremail.value;
         if (email) {
@@ -29,7 +32,8 @@ function startApp() {
             modalConMensaje(ListDeMensajesDispoiblesEnum.EMAIL_NO_RELLENADO, ListaDeTiposDeAlertaEnum.WARNING);
         }
     });
-
+    
+    //boton para hacer el login dinamico y que se mueva todo a la izquierda de un input a otro
     $backBtn.addEventListener('click', () => {
         $step2.classList.add('next');
         $step2.classList.remove('active', 'previous');
@@ -40,6 +44,10 @@ function startApp() {
     // Inicializar el estado de los pasos
     $step2.classList.add('next');
 
+    /**
+     * cuando envian el formlario de login, comprobamos si este se corresponda con alguno de nuestra base de datos,
+     * segun este resultado mostramos el modal correspondiente
+     */
     $loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         document.querySelector('.spinner').style.display = 'block';
@@ -61,6 +69,7 @@ function startApp() {
     });
 }
 
+//#region Catptcha
 function mostrarReCaptcha() {
     const captchaContainer = document.createElement('form');
     captchaContainer.classList.add('captcha');
