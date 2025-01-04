@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/captchaController.js</title>
+    <title>JSDoc: Source: repository/UserRepository.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/captchaController.js</h1>
+    <h1 class="page-title">Source: repository/UserRepository.js</h1>
 
     
 
@@ -26,29 +26,48 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../utils/modalConMensaje.js';
+            <pre class="prettyprint source linenums"><code>//#region Imports
+import { API_USERS_URI } from '../../../config/env.js';
+import { User } from '../entities/User.js';
 
-/**
- * funcino que comprueba si la respuesta del usuario al captcha coincide con la correcta 
- * si es incorrecta muestra un errror, si es correcta muestra un mensaje y a los 5 segundos nos redirije a la página 
- * siguiente
- * @param {Event} e 
- * @param {String} captcha
- * @param {String} userInput
- */
-export function handleCaptchaSubmit(e, captcha, userInput) {
-    e.preventDefault();
+//#region User Rep. Class
+export class UserRepository {
 
-    if (captcha !== userInput) {
-        return modalConMensaje(ListDeMensajesDispoiblesEnum.CAPTCHA_NO_SUPERADO, ListaDeTiposDeAlertaEnum.ERROR);
+    //Attributtes
+    #Users_API = API_USERS_URI;
+
+    //#region Get Users
+    /**
+     * funcion que nos devuelve la lista entera de usuarios en formato JSON
+     * @returns {JSON}
+     */
+    async getUsers() {
+        const data = await fetch(this.#Users_API);
+        return await data.json();
     }
 
-    modalConMensaje(ListDeMensajesDispoiblesEnum.CAPTCHA_SUPERADO, ListaDeTiposDeAlertaEnum.SUCCESS);
-    setTimeout(() => {
-        sessionStorage.setItem('autentication', true);
-        window.location.href = '../categories';
-    }, 5000);
-}</code></pre>
+    /**
+     * funcion que dado un email nos devolverá true o false en funcion de si este está en la lista de usuarios o no
+     * @param {String} email 
+     * @returns {Boolean}
+     */
+    async getUserByEmail(email = '') {
+        return (await this.getUsers()).find(u => u.email == email)
+    }
+
+    //#region Set User Session
+    /**
+     * establece en la sesion al objeto usuario actual 
+     * @param {String} email 
+     */
+    async setUserToSesionWithEmail(email = '') {
+        const user = await this.getUserByEmail(email);
+        const sessionUser = new User(user.email, user.username);
+        sessionStorage.setItem('currentUser', JSON.stringify(sessionUser));
+    }
+}
+
+</code></pre>
         </article>
     </section>
 

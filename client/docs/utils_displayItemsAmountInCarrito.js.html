@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/captchaController.js</title>
+    <title>JSDoc: Source: utils/displayItemsAmountInCarrito.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/captchaController.js</h1>
+    <h1 class="page-title">Source: utils/displayItemsAmountInCarrito.js</h1>
 
     
 
@@ -26,28 +26,22 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../utils/modalConMensaje.js';
+            <pre class="prettyprint source linenums"><code>import { Carrito } from '../entities/Carrito.js';
 
 /**
- * funcino que comprueba si la respuesta del usuario al captcha coincide con la correcta 
- * si es incorrecta muestra un errror, si es correcta muestra un mensaje y a los 5 segundos nos redirije a la página 
- * siguiente
- * @param {Event} e 
- * @param {String} captcha
- * @param {String} userInput
+ * function que usando el repositorio de nuestro carrito toma el numero de objetos que tenemos en total
+ * @returns {String}
  */
-export function handleCaptchaSubmit(e, captcha, userInput) {
-    e.preventDefault();
+export function displayItemsAmountInCarrito() {
+    return new Carrito().getNumeroDeItems();
+}
 
-    if (captcha !== userInput) {
-        return modalConMensaje(ListDeMensajesDispoiblesEnum.CAPTCHA_NO_SUPERADO, ListaDeTiposDeAlertaEnum.ERROR);
-    }
-
-    modalConMensaje(ListDeMensajesDispoiblesEnum.CAPTCHA_SUPERADO, ListaDeTiposDeAlertaEnum.SUCCESS);
-    setTimeout(() => {
-        sessionStorage.setItem('autentication', true);
-        window.location.href = '../categories';
-    }, 5000);
+/**
+ * function que meustra en la cabecera el numero de objetos que tenemos en total
+ */
+export function displayAmountOfItems() {
+    const carritoAmountContainer = document.getElementById('itemsAmount');
+    carritoAmountContainer.textContent = displayItemsAmountInCarrito();
 }</code></pre>
         </article>
     </section>

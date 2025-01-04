@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/captchaController.js</title>
+    <title>JSDoc: Source: entities/User.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/captchaController.js</h1>
+    <h1 class="page-title">Source: entities/User.js</h1>
 
     
 
@@ -26,29 +26,44 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ListDeMensajesDispoiblesEnum, ListaDeTiposDeAlertaEnum, modalConMensaje } from '../utils/modalConMensaje.js';
+            <pre class="prettyprint source linenums"><code>//#region User Class
+export class User {
+ 
+    //#region Attributes
+    #token;
+    #email;
+    #username;
 
-/**
- * funcino que comprueba si la respuesta del usuario al captcha coincide con la correcta 
- * si es incorrecta muestra un errror, si es correcta muestra un mensaje y a los 5 segundos nos redirije a la página 
- * siguiente
- * @param {Event} e 
- * @param {String} captcha
- * @param {String} userInput
- */
-export function handleCaptchaSubmit(e, captcha, userInput) {
-    e.preventDefault();
-
-    if (captcha !== userInput) {
-        return modalConMensaje(ListDeMensajesDispoiblesEnum.CAPTCHA_NO_SUPERADO, ListaDeTiposDeAlertaEnum.ERROR);
+    //#region Constructor
+    constructor(email, username) {
+        this.#token = Date.now();
+        this.#email = email;
+        this.#username = username;
     }
 
-    modalConMensaje(ListDeMensajesDispoiblesEnum.CAPTCHA_SUPERADO, ListaDeTiposDeAlertaEnum.SUCCESS);
-    setTimeout(() => {
-        sessionStorage.setItem('autentication', true);
-        window.location.href = '../categories';
-    }, 5000);
-}</code></pre>
+    //#region GETTERS
+    getEmail() { return this.#email; }
+    getUsername() { return this.#username; }
+    getToken() { return this.#token; }
+
+    //#region SETTERS
+    setEmail(newEmail) { this.#email = newEmail; }
+    setUsername(newUsername) { this.#username = newUsername; }
+
+    //#region To Json
+    /**
+     * function que nos devuelve todos los datos de nuestro Usuario
+     * @returns {Object}
+     */
+    toJSON() {
+        return {
+            email: this.#email,
+            username: this.#username,
+            token: this.#token
+        };
+    }
+}
+</code></pre>
         </article>
     </section>
 
