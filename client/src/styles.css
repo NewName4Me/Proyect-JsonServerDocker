@@ -108,3 +108,43 @@ main #about figure img {
         margin-top: 2rem;
     }
 }
+
+/* Definimos la animación de entrada */
+@keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Configuramos las secciones del main */
+  main section {
+    view-timeline-name: --section-scroll;
+    view-timeline-axis: block;
+  }
+  
+  /* Animación para los artículos */
+  main section article {
+    animation: fade-in linear;
+    animation-timeline: view();
+    animation-range: entry 10% cover 50%;
+  }
+  
+  /* Animación para las figuras con un poco de retraso */
+  main section figure {
+    animation: fade-in linear;
+    animation-timeline: view();
+    animation-range: entry 10% cover 55%;
+  }
+  
+  /* Mantenemos los estilos responsive existentes */
+  @media (max-width: 768px) {
+    main section article,
+    main section figure {
+      animation-range: entry 25% cover 40%;
+    }
+  }
