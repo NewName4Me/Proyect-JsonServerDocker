@@ -145,6 +145,6 @@ main #about figure img {
   @media (max-width: 768px) {
     main section article,
     main section figure {
-      animation-range: entry 25% cover 40%;
+      animation-range: entry 15% cover 40%;
     }
   }
