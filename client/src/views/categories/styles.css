@@ -1,108 +1,130 @@
 h1 {
     text-align: center;
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-family: 'Capi';
-    padding-top: 2rem;
+    padding: 3rem 0;
     color: var(--base-content);
     position: relative;
-    animation: toTheBottomAndStay 1s ease;
-}
-
-h1:hover::after {
-    width: 20%;
 }
 
 h1::after {
-    transition: all 0.5s ease;
+    content: '';
+    display: block;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    content: '';
-    display: block;
     background: var(--warning);
-    width: 0%;
-    height: 7px;
-    border-radius: 16px;
+    width: 60px;
+    height: 4px;
+    margin-top: 0.5rem;
+    transition: width 0.3s ease;
+}
+
+h1:hover::after {
+    width: 120px;
 }
 
 #categoriesContainer {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1rem;
-    margin: 2rem;
-}
-
-.amountOfMeals {
-    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
 #categoriesContainer article {
-    text-align: center;
-    display: grid;
-    place-content: center;
     position: relative;
-    height: 40vh;
-    padding-left: 2vw;
+    border-radius: 12px;
+    background: var(--base-content);
     overflow: hidden;
-    border-radius: 4px;
-    background: var(--base-200);
+    height: auto;
+    aspect-ratio: 4/3;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#categoriesContainer article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 #categoriesContainer article img {
-    width: 90%;
-    transition: all 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
 #categoriesContainer article:hover img {
-    filter: blur(10px);
+    transform: scale(1.05);
+    filter: brightness(0.7);
 }
 
-#categoriesContainer article:hover .informationContainer {
-    animation: toTheTopStay 2s ease-in-out forwards;
-    opacity: 1;
-}
-
-#categoriesContainer .informationContainer {
+.informationContainer {
     position: absolute;
-    bottom: 0%;
-    opacity: 0;
-    transition: all 0.5s ease;
-    background: rgba(0, 0, 0, 0.522);
-    height: 100%;
-    display: grid;
-    grid-template-rows: 10% 1fr 15%;
-    padding: 0.5rem;
-    gap: 1rem;
-    width: 100%;
+    inset: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-#categoriesContainer .informationContainer p {
-    max-height: 7.5em;
-    overflow-y: hidden;
-    padding-inline: 1rem;
-}
-
-#categoriesContainer .informationContainer h2 {
+.informationContainer h2 {
     color: var(--base-300);
-    font-weight: bolder;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
-#categoriesContainer .informationContainer p {
+.informationContainer p {
     color: var(--base-100);
-    font-size: large;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-#categoriesContainer .informationContainer a{
-    font-size: larger;
+#categoriesContainer article:hover .informationContainer p {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-@keyframes toTheTopStay {
-    0% {
-        transform: translateY(100%);
+.informationContainer .btn {
+    align-self: flex-start;
+    padding: 0.75rem 1.5rem;
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#categoriesContainer article:hover .btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #categoriesContainer {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 0 1rem;
     }
 
-    20%,
-    100% {
-        transform: translateY(0%);
+    .informationContainer h2 {
+        font-size: 1.5rem;
     }
 }
