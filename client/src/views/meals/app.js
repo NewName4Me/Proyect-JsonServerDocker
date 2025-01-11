@@ -28,6 +28,8 @@ async function startApp() {
  * @param {String} order 
  */
 async function loadPage(page, categoria = null, order = 'sin') {
+    document.querySelector('.spinner').style.display = 'block';
+
     const urlParams = new URLSearchParams(location.search);
     if (!categoria) {
         categoria = urlParams.get('categoria'); // Toma categoría desde los parámetros

@@ -42,6 +42,17 @@ h1::after {
     background: var(--base-200);
     min-height: fit-content;
     position: relative;
+    animation: circleAnimation 2s;
+}
+
+@keyframes circleAnimation {
+    from {
+        clip-path: circle(1%);
+    }
+
+    to {
+        clip-path: circle(100%);
+    }
 }
 
 .mealCardBasicInfo {
@@ -67,7 +78,7 @@ h1::after {
     width: 100%;
 }
 
-.priceContainer{
+.priceContainer {
     position: absolute;
     top: 3%;
     right: 4%;
@@ -79,7 +90,7 @@ h1::after {
     cursor: default;
 }
 
-.priceContainer:hover{
+.priceContainer:hover {
     background: var(--success);
 }
 
@@ -93,11 +104,11 @@ h1::after {
 }
 
 .tag {
-    background:#bba;
+    background: #bba;
     color: black;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    font-size:1rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -135,7 +146,7 @@ h1::after {
     background: var(--success);
 }
 
-.pag-btn-active:hover{
+.pag-btn-active:hover {
     background: var(--success-focus);
 }
 
