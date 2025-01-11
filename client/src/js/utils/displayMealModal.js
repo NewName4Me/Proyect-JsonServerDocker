@@ -4,7 +4,6 @@
  * @param {Object} meal 
  */
 export function mostrarModal(meal) {
-    console.log(meal);
     const { strInstructions, strArea, strYoutube } = meal;
 
     const modal = document.createElement('DIALOG');
@@ -57,7 +56,9 @@ export function mostrarModal(meal) {
 
     closeModal.addEventListener('click', () => {
         modal.close();
-        document.getElementById('mealsContainer').classList.remove('modalShown');
+        if (document.getElementById('mealsContainer')) {
+            document.getElementById('mealsContainer').classList.remove('modalShown');
+        }
     });
 
     const mealContaier = document.getElementById('mealsContainer');

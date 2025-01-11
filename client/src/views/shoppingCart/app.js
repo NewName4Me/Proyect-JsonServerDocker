@@ -96,7 +96,11 @@ async function designItem(itemKey, itemValue) {
     itemContainer.addEventListener('click', async (e) => {
         const mealId = e.currentTarget.getAttribute('data-id');
         const mealData = await new MealsRepository().getMealById(mealId);
-        mostrarModal(mealData);
+
+        //para impedir que se muestre el modal si pulsan algún boton (que aumenta o disminuye la cantidad de items)
+        if (e.target.tagName !== 'BUTTON') {
+            mostrarModal(mealData);
+        }
     });
 
     return itemContainer;
