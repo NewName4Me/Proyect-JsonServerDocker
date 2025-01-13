@@ -26,6 +26,12 @@ footer ul {
 footer ul li {
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+footer ul li a{
+    color: black;
 }
 
 @media (max-width: 600px) {
