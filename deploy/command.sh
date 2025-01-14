@@ -29,6 +29,28 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo rm -rf /var/www/html/* 
 sudo cp -r /tmp/mi_repositorio/client/ /var/www/html/
 
+#agregar configuracion del servidor para que use el dominio que necesitamos
+echo "<VirtualHost *:80>
+    ServerAdmin mail@codewithsusan.com
+    DocumentRoot /var/www/
+
+    <Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <IfModule mod_dir.c>
+        DirectoryIndex index.html index.php
+    </IfModule>
+</VirtualHost>" | sudo tee /etc/apache2/sites-available/tortarod.shop.conf
+cd /etc/apache2/sites-available/
+sudo a2ensite tortarod.shop.conf
+sudo systemctl reload apache2
+
 # ejecutar Dockerfile en carpeta db(esto debe ejecutarse al final siempre)
 cd /tmp/mi_repositorio/db/
 sudo docker build -t json-server-multi .
