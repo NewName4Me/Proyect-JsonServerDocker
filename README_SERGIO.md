@@ -1,5 +1,12 @@
 # Tienes el código javascript en los siguientes directorios: 
 
+## Para desplegar las "bases de datos": (tendrás que ejecutar cada uno de los json-server en una terminal diferente)
+
+    + npm i -g json-server
+    + npx json-server -p 3000 ./db/users.json
+    + npx json-server -p 3001 ./db/meals.json
+    + npx json-server -p 3002 ./db/categories.json
+
 ### ***Todo se encuentra dentro de la carpeta "client":***
 
     + Carpeta "config" => un archivo env.js donde se almacenan las rutas que tienen acceso a las tres "Bases de datos" (meals, users, categories)
