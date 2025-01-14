@@ -57,17 +57,19 @@ jobs:
         run: terraform apply -auto-approve
 
       #region __Obtener IP
-      - name: Obtener IP pública
+      - name: Obtener IP y DNS público
         if: success()
         working-directory: ./deploy
-        id: get-ip
+        id: get-instance-info
         run: |
           echo "public_ip=$(terraform output -raw ec2_instance_public_ip)" >> $GITHUB_OUTPUT
+          echo "public_dns=$(terraform output -raw ec2_instance_public_dns)" >> $GITHUB_OUTPUT
 
-      - name: Mostrar IP pública
+      - name: Mostrar información de la instancia
         if: success()
         run: |
-          echo "La IP pública de la instancia EC2 es: ${{ steps.get-ip.outputs.public_ip }}"
+          echo "La IP pública de la instancia EC2 es: ${{ steps.get-instance-info.outputs.public_ip }}"
+          echo "El DNS público de la instancia EC2 es: ${{ steps.get-instance-info.outputs.public_dns }}"
 
         #region __Update Env.js
       - name: Actualizar env.js con la nueva IP
@@ -76,7 +78,7 @@ jobs:
           cd client/config
           if [ -f env.js ]; then
             # Reemplazar solo lo que está entre // y :
-            sed -i -E "s|//[^:]+:|//${{ steps.get-ip.outputs.public_ip }}:|g" env.js
+            sed -i -E "s|//[^:]+:|//${{ steps.get-instance-info.outputs.public_ip }}:|g" env.js
             echo "Contenido actualizado de env.js:"
             cat env.js
           else
@@ -92,7 +94,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git pull
           git add client/config/env.js
-          git commit -m "Update API endpoints with new EC2 IP: ${{ steps.get-ip.outputs.public_ip }}"
+          git commit -m "Update API endpoints with new EC2 IP: ${{ steps.get-instance-info.outputs.public_ip }}"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -104,6 +106,31 @@ jobs:
         with:
           name: terraform-tfstate
           path: ./deploy/terraform.tfstate
+
+      #region __Transfer Certificates
+      - name: Crear archivos temporales de certificados
+        if: success()
+        run: |
+          echo "${{ secrets.CA_BUNDLE }}" > /tmp/ca_bundle
+          echo "${{ secrets.CERTIFICATE }}" > /tmp/certificate
+          echo "${{ secrets.PRIVATE_KEY }}" > /tmp/private_key
+          echo "${{ secrets.CLAVE_PEM }}" > /tmp/key.pem
+          chmod 600 /tmp/key.pem
+
+      - name: Transferir certificados a EC2
+        if: success()
+        run: |
+          # Esperar un momento para asegurarse que la instancia esté lista
+          sleep 30
+          # Transferir cada archivo usando el DNS público de EC2
+          scp -o StrictHostKeyChecking=no -i /tmp/key.pem /tmp/ca_bundle admin@${{ steps.get-instance-info.outputs.public_dns }}:/tmp/
+          scp -o StrictHostKeyChecking=no -i /tmp/key.pem /tmp/certificate admin@${{ steps.get-instance-info.outputs.public_dns }}:/tmp/
+          scp -o StrictHostKeyChecking=no -i /tmp/key.pem /tmp/private_key admin@${{ steps.get-instance-info.outputs.public_dns }}:/tmp/
+          
+      - name: Limpiar archivos temporales
+        if: always()
+        run: |
+          rm -f /tmp/ca_bundle /tmp/certificate /tmp/private_key /tmp/key.pem
 
   #region Destroy
   destroy:
