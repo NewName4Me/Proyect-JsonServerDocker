@@ -13,7 +13,6 @@ resource "aws_security_group" "webserver_security_group" {
     cidr_blocks = [var.ingress_http_cidr]
   }
 
-
   ingress {
     description = "ssh access"
     from_port   = 22
@@ -41,6 +40,14 @@ resource "aws_security_group" "webserver_security_group" {
     from_port   = 3002
     to_port     = 3002
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "icmp access"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
