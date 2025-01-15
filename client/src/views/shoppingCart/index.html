@@ -28,21 +28,21 @@
 </head>
 
 <body>
-    <div id="header__menu__icon">
+    <div id="header__menu__icon" class="menu menu--mobile">
         <label for="menuIcon"><img src="../../../public/icons/menu.svg" alt=""></label>
         <input type="checkbox" name="menuIcon" id="menuIcon">
     </div>
-    <header id="header">
-        <nav>
-            <ul>
-                <li><a href="../../index.html"><img src="../../../public/img/logo.png" alt="Logo"></a></li>
+    <header id="header" class="header">
+        <nav class="header__nav">
+            <ul class="header__list">
+                <li class="header__item header__item--logo"><a href="../../index.html"><img src="../../../public/img/logo.png" alt="Logo"></a></li>
                 <div class="links">
                     <li><a href="../../index.html">Home</a></li>
                     <li><a href="../../index.html#about">About</a></li>
                     <li><a href="../categories/">Categories</a></li>
                     <li><a href="../meals/">Meals</a></li>
                 </div>
-                <li id="carrito"><a href="../shoppingCart/"><img src="../../../public/icons/shoppingCart.svg"
+                <li id="carrito" class="header__item header__item--cart"><a href="../shoppingCart/"><img src="../../../public/icons/shoppingCart.svg"
                             alt=""><span id="itemsAmount"></span></a></li>
             </ul>
         </nav>
@@ -51,8 +51,8 @@
         <img src="../../../public/icons/door.svg" alt="">
     </button>
 
-    <main>
-        <h1>Carrito</h1>
+    <main class="main">
+        <h1 class="main__title">Carrito</h1>
         <div class="mainContent">
             <section id="contenedorDeItems"></section>
             <section id="resumenDeCompra" class="bxS-floating">
@@ -86,10 +86,10 @@
 
     </main>
 
-    <footer>
-        <section>
-            <h2>Location</h2>
-            <ul>
+    <footer class="footer">
+        <section class="footer__section">
+            <h2 class="footer__title">Location</h2>
+            <ul class="footer__list">
                 <li>Spain</li>
                 <li>France</li>
                 <li>UK</li>
@@ -97,25 +97,25 @@
                 <li>Italy</li>
             </ul>
         </section>
-        <section>
-            <h2>Contact</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Contact</h2>
+            <ul class="footer__list">
                 <li>+34 12 3456 789</li>
                 <li>tortarod@gmail.com</li>
                 <li>etorrod1403@g.educaand.es</li>
             </ul>
         </section>
-        <section>
-            <h2>Our Service</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Our Service</h2>
+            <ul class="footer__list">
                 <li>Fast delivery</li>
                 <li>Easy Payments</li>
                 <li>24 x 7 Service</li>
             </ul>
         </section>
-        <section>
-            <h2>Follows</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Follows</h2>
+            <ul class="footer__list">
                 <li><img src="../../../public/icons/facebook.svg" alt="Link de: "> - <a href="">Facebook</a></li>
                 <li><img src="../../../public/icons/instangram.svg" alt="Icono Link de: "> - <a href="">Instangram</a></li>
                 <li><img src="../../../public/icons/twitter.svg" alt="Link de: "> - <a href="">Twitter</a></li>

@@ -21,32 +21,32 @@
 
 <body>
 
-    <div id="header__menu__icon">
+    <div id="header__menu__icon" class="menu menu--mobile">
         <label for="menuIcon"><img src="../public/icons/menu.svg" alt="Icono Menu"></label>
         <input type="checkbox" name="menuIcon" id="menuIcon">
     </div>
-    <header id="header">
-        <nav>
-            <ul>
-                <li><img src="../public/img/logo.png" alt="Logo"></li>
-                <div class="links">
+    <header id="header" class="header">
+        <nav class="header__nav">
+            <ul class="header__list">
+                <li class="header__item--logo"><img src="../public/img/logo.png" alt="Logo"></li>
+                <div class="links header__links">
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="./views/categories/" class="checkAuth">Categories</a></li>
                     <li><a href="./views/meals/" class="checkAuth">Meals</a></li>
                 </div>
-                <li id="carrito"><a href="./views/shoppingCart/" class="checkAuth"><img
+                <li id="carrito" class="header__item--cart"><a href="./views/shoppingCart/" class="checkAuth"><img
                             src="../public/icons/shoppingCart.svg" alt="Icono Carrito"></a>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="hero">
-            <article class="bxS-floating">
-                <h1>Get Fresh <span>Food</span> in a Easy Way</h1>
-                <p>Discover an effortless way to enjoy fresh and delicious meals delivered right to your door. Our
+    <main class="main">
+        <section id="hero"  class="hero">
+            <article class="hero__content bxS-floating">
+                <h1 class="hero__title">Get Fresh <span>Food</span> in a Easy Way</h1>
+                <p class="hero__text">Discover an effortless way to enjoy fresh and delicious meals delivered right to your door. Our
                     service ensures quality and convenience, making dining at home a delightful experience every time.
                 </p>
                 <button class="btn-warning">Order now <img src="../public/icons/rightArrow.svg"
@@ -55,11 +55,11 @@
             <figure><img src="../public/img/main_img.png" alt="Imagen Hamburguesa"></figure>
         </section>
 
-        <section id="about">
-            <figure><img src="../public/img/Food-Plate.png" alt="Imagen ensalada"></figure>
-            <article class="bxS-floating">
-                <h1>Get Fresh <span>Food</span> in a Easy Way</h1>
-                <p>Experience the simplicity of having fresh, gourmet meals prepared and delivered with care. We
+        <section id="about" class="about">
+            <figure class="about__figure"><img src="../public/img/Food-Plate.png" alt="Imagen ensalada"></figure>
+            <article class="about__content bxS-floating">
+                <h1 class="about__title">Get Fresh <span>Food</span> in a Easy Way</h1>
+                <p class="about__text">Experience the simplicity of having fresh, gourmet meals prepared and delivered with care. We
                     prioritize freshness and flavor, providing you with a taste of quality in every bite.</p>
                 <button class="btn-warning">Order now <img src="../public/icons/rightArrow.svg"
                         alt="Icono flecha"></button>
@@ -67,10 +67,10 @@
         </section>
     </main>
 
-    <footer>
-        <section>
-            <h2>Location</h2>
-            <ul>
+    <footer class="footer">
+        <section class="footer__section">
+            <h2 class="footer__title">Location</h2>
+            <ul class="footer__list">
                 <li>Spain</li>
                 <li>France</li>
                 <li>UK</li>
@@ -78,25 +78,25 @@
                 <li>Italy</li>
             </ul>
         </section>
-        <section>
-            <h2>Contact</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Contact</h2>
+            <ul class="footer__list">
                 <li>+34 12 3456 789</li>
                 <li>tortarod@gmail.com</li>
                 <li>etorrod1403@g.educaand.es</li>
             </ul>
         </section>
-        <section>
-            <h2>Our Service</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Our Service</h2>
+            <ul class="footer__list">
                 <li>Fast delivery</li>
                 <li>Easy Payments</li>
                 <li>24 x 7 Service</li>
             </ul>
         </section>
-        <section>
-            <h2>Follows</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Follows</h2>
+            <ul class="footer_list">
                 <li><img src="../public/icons/facebook.svg" alt="Link de: "> - <a href="">Facebook</a></li>
                 <li><img src="../public/icons/instangram.svg" alt="Icono Link de: "> - <a href="">Instangram</a></li>
                 <li><img src="../public/icons/twitter.svg" alt="Link de: "> - <a href="">Twitter</a></li>

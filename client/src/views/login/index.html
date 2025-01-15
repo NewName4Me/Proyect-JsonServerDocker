@@ -14,23 +14,23 @@
 </head>
 
 <body>
-    <main>
+    <main class="main">
         <img src="../../../public/img/logo.png" alt="Logo" id="logo">
-        <form action="" name="loginForm" class="bxS-floating">
-            <h1>Welcome back</h1>
-            <p>Enter for the <span class="emphasis">best</span> recipes on the internet</p>
-            <div class="step step-1 active">
+        <form action="" name="loginForm" class="login-form bxS-floating">
+            <h1 class="login-form__title">Welcome back</h1>
+            <p class="login-form__text">Enter for the <span class="emphasis">best</span> recipes on the internet</p>
+            <div class="step step-1 active login-form__step">
                 <input type="email" name="useremail" placeholder="email">
                 <button type="button" class="next-btn btn-info">Next</button>
             </div>
-            <div class="step step-2">
+            <div class="step step-2 login-form__step">
                 <input type="password" name="userpassword" placeholder="password">
                 <div class="buttons">
                     <button type="button" class="back-btn btn-info">Back</button>
                     <input type="submit" value="Login" class="btn-success">
                 </div>
             </div>
-            <div class="spinner">
+            <div class="spinner login-form__spinner">
                 <div class="rect1"></div>
                 <div class="rect2"></div>
                 <div class="rect3"></div>

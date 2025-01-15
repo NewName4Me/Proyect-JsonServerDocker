@@ -20,15 +20,15 @@
 </head>
 
 <body>
-    <div id="header__menu__icon">
+    <div id="header__menu__icon" class="menu menu--mobile">
         <label for="menuIcon"><img src="../../../public/icons/menu.svg" alt="Icono Menu"></label>
         <input type="checkbox" name="menuIcon" id="menuIcon">
     </div>
-    <header id="header">
-        <nav>
-            <ul>
-                <li><a href="../../index.html"><img src="../../../public/img/logo.png" alt="Logo"></a></li>
-                <div class="links">
+    <header id="header" class="header">
+        <nav class="header__nav">
+            <ul class="header__list">
+                <li class="header__item header__item--logo"><a href="../../index.html"><img src="../../../public/img/logo.png" alt="Logo"></a></li>
+                <div class="links header__links">
                     <li><a href="../../index.html">Home</a></li>
                     <li><a href="../../index.html#about">About</a></li>
                     <li><a href="../categories/">Categories</a></li>
@@ -43,9 +43,9 @@
         <img src="../../../public/icons/door.svg" alt="Icono puerta">
     </button>
 
-    <main>
-        <h1>Categories</h1>
-        <section id="categoriesContainer"></section>
+    <main class="main">
+        <h1 class="main__title">Categories</h1>
+        <section id="categoriesContainer" class="categories"></section>
         <div class="spinner">
             <div class="rect1"></div>
             <div class="rect2"></div>
@@ -55,10 +55,10 @@
         </div>
     </main>
 
-    <footer>
-        <section>
-            <h2>Location</h2>
-            <ul>
+    <footer class="footer">
+        <section class="footer__section">
+            <h2 class="footer__title">Location</h2>
+            <ul class="footer__list">
                 <li>Spain</li>
                 <li>France</li>
                 <li>UK</li>
@@ -66,25 +66,25 @@
                 <li>Italy</li>
             </ul>
         </section>
-        <section>
-            <h2>Contact</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Contact</h2>
+            <ul class="footer__list">
                 <li>+34 12 3456 789</li>
                 <li>tortarod@gmail.com</li>
                 <li>etorrod1403@g.educaand.es</li>
             </ul>
         </section>
-        <section>
-            <h2>Our Service</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Our Service</h2>
+            <ul class="footer__list">
                 <li>Fast delivery</li>
                 <li>Easy Payments</li>
                 <li>24 x 7 Service</li>
             </ul>
         </section>
-        <section>
-            <h2>Follows</h2>
-            <ul>
+        <section class="footer__section">
+            <h2 class="footer__title">Follows</h2>
+            <ul class="footer__list">
                 <li><img src="../../../public/icons/facebook.svg" alt="Link de: "> - <a href="">Facebook</a></li>
                 <li><img src="../../../public/icons/instangram.svg" alt="Icono Link de: "> - <a href="">Instangram</a></li>
                 <li><img src="../../../public/icons/twitter.svg" alt="Link de: "> - <a href="">Twitter</a></li>
