@@ -89,16 +89,18 @@ echo "<VirtualHost *:80>
     Header always set Strict-Transport-Security "max-age=63072000"
 
     # Configuración del proxy inverso para Docker
-    ProxyPass "/api" "http://localhost:3000/"
-    ProxyPassReverse "/api" "http://localhost:3000/"
-    ProxyPass "/meals" "http://localhost:3001/"
-    ProxyPassReverse "/meals" "http://localhost:3001/"
-    ProxyPass "/categories" "http://localhost:3002/"
-    ProxyPassReverse "/categories" "http://localhost:3002/"
+    ProxyPass "/api" "http://localhost:3000/users"
+    ProxyPassReverse "/api" "http://localhost:3000/users"
+    ProxyPass "/meals" "http://localhost:3001/meals"
+    ProxyPassReverse "/meals" "http://localhost:3001/meals"
+    ProxyPass "/categories" "http://localhost:3002/categories"
+    ProxyPassReverse "/categories" "http://localhost:3002/categories"
 </VirtualHost>" | sudo tee /etc/apache2/sites-available/tortarod.shop.conf
 sudo a2ensite tortarod.shop.conf
 sudo a2dissite 000-default.conf
 sudo apache2ctl configtest
+sudo a2enmod proxy
+sudo a2enmod proxy_http
 sudo systemctl restart apache2
 
 # Ejecutar Dockerfile en carpeta db (esto debe ejecutarse al final siempre)
