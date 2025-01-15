@@ -1,5 +1,9 @@
 # Tienes el código css en los siguientes directorios: 
 
+## Datos acceso usuario:
+    + email: a@a.com
+    + contraseña : a
+
 + Dentro de la carpeta **client/public/styles** tienes los estilos comunes a todas las páginas. Como pueden ser:
 
     + Colores
