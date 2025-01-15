@@ -12,7 +12,7 @@ export function mostrarModal(meal) {
     const modalImage = document.createElement('IMG');
     const modalTitle = document.createElement('H2');
     const modalInstructions = document.createElement('P');
-    const listaDeIngredientes = document.createElement('UL');
+    const table = document.createElement('TABLE');
     const infoAdicional = document.createElement('DIV');
 
     modalContent.classList.add('modal-content');
@@ -32,9 +32,11 @@ export function mostrarModal(meal) {
         infoAdicional.appendChild(youtubeLink);
     }
 
-    const ingredientesFragment = designListaDeIngredientes(meal);
+    table.classList.add('ingredientes-table');
+
+    const ingredientesFragment = designTablaDeIngredientes(meal);
     if (ingredientesFragment) {
-        listaDeIngredientes.appendChild(ingredientesFragment);
+        table.appendChild(ingredientesFragment);
     }
 
     closeModal.textContent = 'Cerrar';
@@ -48,7 +50,7 @@ export function mostrarModal(meal) {
     modalContent.appendChild(modalTitle);
     modalContent.appendChild(infoAdicional);
     modalContent.appendChild(modalInstructions);
-    modalContent.appendChild(listaDeIngredientes);
+    modalContent.appendChild(table);
     modalContent.appendChild(closeModal);
     modal.appendChild(modalContent);
 
@@ -74,24 +76,31 @@ export function mostrarModal(meal) {
     });
 }
 
-//#region Design Lista Ingredientes
+//#region Design Tabla Ingredientes
 /**
- * function que le da estilos a la lista de ingredientes que tenemos para cada comida
+ * function que le da estilos a la tabla de ingredientes que tenemos para cada comida
  * @param {Object} meal 
  * @returns {HTMLElement}
  */
-function designListaDeIngredientes(meal) {
-    const fragment = document.createDocumentFragment();
+function designTablaDeIngredientes(meal) {
+    const thead = document.createElement('THEAD');
+    const tbody = document.createElement('TBODY');
+
+    thead.innerHTML = `<tr><th>Ingredient</th><th>Quantity</th></tr>`;
 
     for (let i = 1; i <= 20; i++) {
         const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
         if (ingredient) {
-            const ingrdientContainer = document.createElement('LI');
-            ingrdientContainer.textContent = ingredient;
-            fragment.appendChild(ingrdientContainer);
+            const tr = document.createElement('TR');
+            tr.innerHTML = `<td>${ingredient}</td><td>${measure}</td>`;
+            tbody.appendChild(tr);
         } else {
             break;
         }
     }
-    return fragment.children.length > 0 ? fragment : null;
+    const tableFragment = document.createElement('TABLE');
+    tableFragment.appendChild(thead);
+    tableFragment.appendChild(tbody);
+    return tableFragment.children.length > 0 ? tableFragment : null;
 }

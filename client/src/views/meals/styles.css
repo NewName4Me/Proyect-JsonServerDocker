@@ -42,6 +42,7 @@ h1::after {
     background: var(--base-200);
     min-height: fit-content;
     position: relative;
+    max-width: 500px;
     animation: circleAnimation 2s;
 }
 

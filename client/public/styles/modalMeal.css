@@ -13,23 +13,40 @@ dialog {
     max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
-
     animation: expand 0.6s ease-out;
+    scrollbar-width: thin;
+    scrollbar-color: var(--warning) var(--base-200);
 }
 
-/* Animación de expansión usando clip-path */
+/* Scrollbar Styles */
+dialog::-webkit-scrollbar {
+    width: 8px;
+}
+
+dialog::-webkit-scrollbar-track {
+    background: var(--base-200);
+    border-radius: 4px;
+}
+
+dialog::-webkit-scrollbar-thumb {
+    background-color: var(--warning);
+    border-radius: 4px;
+}
+
+/* Animación de expansión mejorada */
 @keyframes expand {
     from {
         clip-path: inset(50% 50% 50% 50%);
         opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
     }
 
     to {
         clip-path: inset(0% 0% 0% 0%);
         opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
     }
 }
-
 
 /* Modal header section with image */
 dialog img {
@@ -37,6 +54,11 @@ dialog img {
     height: 300px;
     object-fit: cover;
     border-radius: 1.5rem 1.5rem 0 0;
+    transition: transform 0.3s ease;
+}
+
+dialog img:hover {
+    transform: scale(1.02);
 }
 
 /* Content container */
@@ -52,6 +74,7 @@ dialog h2 {
     font-family: 'Capi';
     position: relative;
     padding-bottom: 0.75rem;
+    transition: color 0.3s ease;
 }
 
 dialog h2::after {
@@ -63,65 +86,128 @@ dialog h2::after {
     height: 4px;
     background: var(--warning);
     border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+dialog h2:hover::after {
+    width: 100px;
 }
 
 /* Instructions text */
 dialog p {
     margin: 1.5rem 0;
-    line-height: 1.6;
+    line-height: 1.8;
     color: var(--base-content);
+    font-size: 1.1rem;
 }
 
-/* Ingredients list */
-dialog ul {
-    background: var(--base-200);
-    padding: 1.5rem 2rem;
-    border-radius: 1rem;
+/* Enhanced table styles */
+dialog table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
     margin: 1.5rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-dialog li {
-    margin: 0.75rem 0;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-dialog li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--warning);
-}
-
-/* Close button */
-dialog .btn {
-    display: block;
-    margin: 2rem auto 0.5rem;
-    min-width: 120px;
-    transition: transform 0.2s ease;
-}
-
-dialog .btn:hover {
+dialog table:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
     transform: translateY(-2px);
 }
 
+dialog thead {
+    background-color: var(--warning);
+    color: var(--warning-content);
+}
+
+dialog th {
+    font-weight: bold;
+    padding: 1.2rem;
+    text-align: left;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    border: none;
+    text-transform: uppercase;
+}
+
+dialog td {
+    padding: 1rem 1.2rem;
+    border: none;
+    border-bottom: 1px solid var(--base-200);
+    color: var(--base-content);
+    font-size: 1rem;
+}
+
+dialog tr:last-child td {
+    border-bottom: none;
+}
+
+dialog tbody tr {
+    transition: all 0.3s ease;
+    background-color: var(--base-100);
+    position: relative;
+}
+
+dialog tbody tr:hover {
+    background-color: var(--base-200);
+    transform: translateX(8px);
+    cursor: default;
+}
+
+/* Hover effect with sliding indicator */
+dialog tbody td::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: var(--warning);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+dialog tbody td:hover::before {
+    opacity: 1;
+}
+
+dialog tbody tr:nth-child(even) {
+    background-color: var(--base-50, #f8f9fa);
+}
+
+/* Additional information styles */
 .info-adicional {
     display: flex;
     gap: 1.5rem;
-    margin: 1rem 0;
-    padding: 1rem;
+    margin: 1.5rem 0;
+    padding: 1.2rem;
     background: var(--base-200);
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
     align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-adicional:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .info-adicional .videoIcon {
     padding-bottom: 0.5rem;
     font-size: larger;
+    transition: transform 0.3s ease;
+}
+
+.info-adicional:hover .videoIcon {
+    transform: scale(1.2);
 }
 
 .info-adicional span {
     color: var(--base-content);
+    font-size: 1.1rem;
 }
 
 .youtube-link {
@@ -129,10 +215,100 @@ dialog .btn:hover {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    transition: color 0.3s ease;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
 }
 
 .youtube-link:hover {
     color: var(--error-focus);
+    background-color: rgba(var(--error-rgb), 0.1);
+    transform: translateX(4px);
+}
+
+/* Close button */
+dialog .btn {
+    display: block;
+    margin: 2rem auto 0.5rem;
+    min-width: 140px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+dialog .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+dialog .btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+dialog .btn:hover::after {
+    left: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    dialog {
+        width: 90vw;
+    }
+
+    dialog table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    dialog th,
+    dialog td {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    dialog tbody tr:hover {
+        transform: translateX(4px);
+    }
+
+    dialog h2 {
+        font-size: 1.75rem;
+    }
+
+    dialog p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .info-adicional {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}
+
+/* Dark mode considerations */
+@media (prefers-color-scheme: dark) {
+    dialog tbody tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    dialog table {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
 }
