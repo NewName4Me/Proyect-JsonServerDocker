@@ -14,8 +14,12 @@ export class UserRepository {
      * @returns {JSON}
      */
     async getUsers() {
-        const data = await fetch(this.#Users_API);
-        return await data.json();
+        try {
+            const data = await fetch(this.#Users_API);
+            return await data.json();
+        } catch (e) {
+            throw new Error('Falño al tomar los usuarios => ' + e)
+        }
     }
 
     /**
@@ -24,7 +28,11 @@ export class UserRepository {
      * @returns {Boolean}
      */
     async getUserByEmail(email = '') {
-        return (await this.getUsers()).find(u => u.email == email)
+        try {
+            return (await this.getUsers()).find(u => u.email == email)
+        } catch (e) {
+            throw new Error('Fallo al tomar usuario por email => ' + e);
+        }
     }
 
     //#region Set User Session

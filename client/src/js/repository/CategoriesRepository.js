@@ -9,7 +9,11 @@ export class CategoriesRepository {
 
     //#region GETTERS
     async getCategories() {
-        const data = await fetch(this.#Categories_API);
-        return await data.json();
+        try {
+            const data = await fetch(this.#Categories_API);
+            return await data.json();
+        } catch (e) {
+            throw new Error('Error al tomar las Categories =>' + e);
+        }
     }
 }

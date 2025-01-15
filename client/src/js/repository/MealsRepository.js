@@ -28,8 +28,12 @@ export class MealsRepository {
      * @returns {JSON}
      */
     async getMeals(page = 1, items_per_page = 8, order = null) {
-        const data = await fetch(`${this.#Meals_API}?_sort=${this.#OrderMap[order]}&_page=${page}&_per_page=${items_per_page}`);
-        return await data.json() || null;
+        try {
+            const data = await fetch(`${this.#Meals_API}?_sort=${this.#OrderMap[order]}&_page=${page}&_per_page=${items_per_page}`);
+            return await data.json() || null;
+        } catch (e) {
+            throw new Error('Error al tomar las comidas =>' + e);
+        }
     }
 
     //#region __Get Meals By Category
@@ -44,8 +48,12 @@ export class MealsRepository {
      * @returns {JSON}
      */
     async getMealsFiltedByCategory(category = '', page = 1, items_per_page = 8, order = null) {
-        const data = await fetch(`${this.#Meals_API}?_sort=${this.#OrderMap[order]}&_page=${page}&_per_page=${items_per_page}&strCategory=${category}`);
-        return await data.json();
+        try {
+            const data = await fetch(`${this.#Meals_API}?_sort=${this.#OrderMap[order]}&_page=${page}&_per_page=${items_per_page}&strCategory=${category}`);
+            return await data.json();
+        } catch (e) {
+            throw new Error('Error al tomar las comidas =>' + e);
+        }
     }
 
     //#region __Get Meal By Id
@@ -55,7 +63,11 @@ export class MealsRepository {
      * @returns {JSON}
      */
     async getMealById(id) {
-        const data = await fetch(`${this.#Meals_API}/${id}`);
-        return await data.json();
+        try {
+            const data = await fetch(`${this.#Meals_API}/${id}`);
+            return await data.json();
+        } catch (e) {
+            throw new Error('Error al tomar la comdia identificada por id =>' + e);
+        }
     }
 }
