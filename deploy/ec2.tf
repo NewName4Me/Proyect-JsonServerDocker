@@ -27,5 +27,41 @@ resource "aws_instance" "ec2_instance" {
   tags = {
     Name = "web-instance"
   }
-}
 
+  provisioner "file" {
+    source      = "./credentials/certificate.crt"
+    destination = "/tmp/certificate.crt"
+
+    connection {
+      type        = "ssh"
+      user        = "admin"    # Este es correcto para Debian
+      private_key = file("./credentials/miPrimeraClave.pem")
+      host        = self.public_ip
+      timeout     = "4m"       # Añadido para dar tiempo a que la instancia esté lista
+    }
+  }
+  provisioner "file" {
+    source      = "./credentials/ca_bundle.crt"
+    destination = "/tmp/ca_bundle.crt"
+
+    connection {
+      type        = "ssh"
+      user        = "admin"    # Este es correcto para Debian
+      private_key = file("./credentials/miPrimeraClave.pem")
+      host        = self.public_ip
+      timeout     = "4m"       # Añadido para dar tiempo a que la instancia esté lista
+    }
+  }
+  provisioner "file" {
+    source      = "./credentials/private.key"
+    destination = "/tmp/private.key"
+
+    connection {
+      type        = "ssh"
+      user        = "admin"    # Este es correcto para Debian
+      private_key = file("./credentials/miPrimeraClave.pem")
+      host        = self.public_ip
+      timeout     = "4m"       # Añadido para dar tiempo a que la instancia esté lista
+    }
+  }
+}
