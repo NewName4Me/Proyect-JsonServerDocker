@@ -70,19 +70,19 @@ jobs:
           echo "La IP pública de la instancia EC2 es: ${{ steps.get-ip.outputs.public_ip }}"
 
         #region __Update Env.js
-      - name: Actualizar env.js con la nueva IP
-        if: success()
-        run: |
-          cd client/config
-          if [ -f env.js ]; then
+      #- name: Actualizar env.js con la nueva IP
+       # if: success()
+        #run: |
+         # cd client/config
+          #if [ -f env.js ]; then
             # Reemplazar solo lo que está entre // y :
-            sed -i -E "s|//[^:]+:|//${{ steps.get-ip.outputs.public_ip }}:|g" env.js
-            echo "Contenido actualizado de env.js:"
-            cat env.js
-          else
-            echo "Error: env.js no encontrado en client/config/"
-            exit 1
-          fi
+           # sed -i -E "s|//[^:]+:|//${{ steps.get-ip.outputs.public_ip }}:|g" env.js
+            #echo "Contenido actualizado de env.js:"
+            #cat env.js
+          #else
+           # echo "Error: env.js no encontrado en client/config/"
+            #exit 1
+          #fi
 
       #region __Update Repository
       - name: Commit y push de los cambios
