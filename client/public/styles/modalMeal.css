@@ -251,12 +251,10 @@ dialog .btn::after {
     height: 100%;
     top: 0;
     left: -100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
     transition: 0.5s;
 }
 
@@ -265,7 +263,7 @@ dialog .btn:hover::after {
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 576px) {
     dialog {
         width: 90vw;
     }
@@ -275,13 +273,13 @@ dialog .btn:hover::after {
         overflow-x: auto;
         white-space: nowrap;
     }
-    
+
     dialog th,
     dialog td {
         padding: 0.75rem 1rem;
         font-size: 0.95rem;
     }
-    
+
     dialog tbody tr:hover {
         transform: translateX(4px);
     }
@@ -299,16 +297,5 @@ dialog .btn:hover::after {
         flex-direction: column;
         gap: 1rem;
         align-items: flex-start;
-    }
-}
-
-/* Dark mode considerations */
-@media (prefers-color-scheme: dark) {
-    dialog tbody tr:nth-child(even) {
-        background-color: rgba(255, 255, 255, 0.03);
-    }
-
-    dialog table {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 }

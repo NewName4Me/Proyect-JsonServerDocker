@@ -82,7 +82,7 @@ main .mainContent {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 576px) {
     #contenedorDeItems section {
         grid-template-columns: 1fr 2fr 1fr;
         grid-template-areas:
@@ -302,7 +302,7 @@ main .mainContent {
 }
 
 /* Responsive text adjustments */
-@media (max-width: 640px) {
+@media (max-width: 576px) {
     h1 {
         font-size: 2rem;
         padding-top: 1rem;

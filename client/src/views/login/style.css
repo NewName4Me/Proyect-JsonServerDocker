@@ -251,7 +251,7 @@ input[type="submit"]:hover {
 }
 
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 576px) {
     main {
         grid-template-columns: 1fr;
     }
@@ -266,7 +266,7 @@ input[type="submit"]:hover {
         max-width: none;
     }
 
-    .collage{
+    .collage {
         position: absolute;
         top: 0%;
         left: 50%;
@@ -305,11 +305,11 @@ input[type="submit"]:hover {
     transition: scale 0.2s ease;
 }
 
-.collage figure:hover{
+.collage figure:hover {
     scale: 1.05;
 }
 
-.collage:has(figure:hover) figure:not(:hover){
+.collage:has(figure:hover) figure:not(:hover) {
     scale: 0.95;
     filter: blur(1px);
 }

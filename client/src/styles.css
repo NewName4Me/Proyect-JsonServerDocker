@@ -78,7 +78,7 @@ main #about figure img {
 /* Base styles remain the same */
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 576px) {
 
     main #hero,
     main #about {
@@ -112,39 +112,41 @@ main #about figure img {
 /* Definimos la animación de entrada */
 @keyframes fade-in {
     from {
-      opacity: 0;
-      transform: translateY(100px);
+        opacity: 0;
+        transform: translateY(100px);
     }
+
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-  
-  /* Configuramos las secciones del main */
-  main section {
+}
+
+/* Configuramos las secciones del main */
+main section {
     view-timeline-name: --section-scroll;
     view-timeline-axis: block;
-  }
-  
-  /* Animación para los artículos */
-  main section article {
+}
+
+/* Animación para los artículos */
+main section article {
     animation: fade-in linear;
     animation-timeline: view();
     animation-range: entry 10% cover 50%;
-  }
-  
-  /* Animación para las figuras con un poco de retraso */
-  main section figure {
+}
+
+/* Animación para las figuras con un poco de retraso */
+main section figure {
     animation: fade-in linear;
     animation-timeline: view();
     animation-range: entry 10% cover 55%;
-  }
-  
-  /* Mantenemos los estilos responsive existentes */
-  @media (max-width: 768px) {
+}
+
+/* Mantenemos los estilos responsive existentes */
+@media (max-width: 576px) {
+
     main section article,
     main section figure {
-      animation-range: entry 15% cover 40%;
+        animation-range: entry 15% cover 40%;
     }
-  }
+}

@@ -30,11 +30,11 @@ footer ul li {
     align-items: center;
 }
 
-footer ul li a{
+footer ul li a {
     color: black;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 576px) {
     footer {
         display: grid;
         grid-template-columns: 1fr 1fr;
